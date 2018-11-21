@@ -1,0 +1,8 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.anchor-pane {
+	-fx-background-color:  #ff6666;	
+}
+
+.side-menu {
+	-fx-background-color:  #ff1a1a;	
+}

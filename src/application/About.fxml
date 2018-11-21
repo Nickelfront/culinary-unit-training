@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="aboutAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AboutController">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <children>
+      <Text layoutX="14.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Това приложение е разработено с образователна цел. Всички данни, използвани в това приложение, са фиктивни и нямат общо с действителността." wrappingWidth="477.9830722808838" />
+      <JFXButton fx:id="btnClose" defaultButton="true" layoutX="363.0" layoutY="441.0" onAction="#closeAboutWindow" prefHeight="45.0" prefWidth="123.0" style="-fx-background-color: #755757;" text="Затвори" />
+      <Text layoutX="14.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Разработили:" />
+      <Text layoutX="14.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Божидар Иванов Иванов, ф.№ 109620, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
+      <Text layoutX="14.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Никол Евгениева Панайотова, ф.№ 109556, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
+      <Label layoutX="15.0" layoutY="464.0" text="2018 - Всички права запазени." />
+      <Label layoutX="15.0" layoutY="153.0" text="DISCLAIMER" />
+   </children>
+</AnchorPane>

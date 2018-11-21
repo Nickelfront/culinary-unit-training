@@ -1,0 +1,21 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.anchor-pane {
+	-fx-background-color:  #f2e6e3;
+}
+
+.side-menu {
+	-fx-background-color:  #666;
+}
+
+.hamburger:hover {
+	-fx-color: #333;
+}
+
+.about-link {
+	-fx-border-style: none;
+	-fx-color: #000;
+}
+
+.about-link:hover {
+	-fx-underline: false;
+}
