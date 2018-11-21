@@ -42,6 +42,7 @@ public class SideMenuController implements Initializable {
 	@FXML 
 	Label userName;
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Properties session = new Properties();
@@ -59,25 +60,31 @@ public class SideMenuController implements Initializable {
 		userImageHolder.setImage(userPicture);
 
 		userName.setText(session.getProperty("loggedUser"));
-		System.out.println(homeBtn.getParent());
-		System.out.println(homeBtn.getScene());
+		
 	}
 
 
-	@FXML public void openHome() throws IOException {
-		System.out.println(homeBtn.getScene());
+	@FXML
+	public void openHome() throws IOException {
+		SceneLoader sceneLoader = SceneLoader.getInstance();
+
+		sceneLoader.switchScene("Home");
 	}
 
 	@FXML public void openClients() {
+		
+		SceneLoader sceneLoader = SceneLoader.getInstance();
+		
+		sceneLoader.switchScene("About");
 	}
 
 	@FXML
 	public void exitApplication() {
-		ButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);
-		ButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
+		ButtonType yes = new ButtonType("пїЅпїЅпїЅпїЅпїЅ", ButtonData.OK_DONE);
+		ButtonType no = new ButtonType("пїЅпїЅпїЅпїЅпїЅ", ButtonData.CANCEL_CLOSE);
 		
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да напуснете?", yes, no);
-		alert.setTitle("Изход");
+		Alert alert = new Alert(AlertType.CONFIRMATION, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ?", yes, no);
+		alert.setTitle("пїЅпїЅпїЅпїЅпїЅ");
 		alert.showAndWait();
 		if (alert.getResult().equals(yes)) {
 			Stage stage = (Stage) exitBtn.getScene().getWindow();

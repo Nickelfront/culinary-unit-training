@@ -13,6 +13,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage stage) {
 		AnchorPane root;
+		
 		try {
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
 			Scene scene = new Scene(root);

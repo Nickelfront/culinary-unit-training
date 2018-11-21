@@ -6,19 +6,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 public class SceneLoader {
-
-	public static SceneLoader getInstance() {
-		return new SceneLoader();
+	private static SceneLoader inst = null;
+	
+	private AnchorPane appContainer;
+	
+	private SceneLoader() {
+		
 	}
 	
-	private SceneLoader() {}
+	public static SceneLoader getInstance() {
+		if (inst == null) {
+			inst = new SceneLoader();
+		}
+		return inst;
+	}
 	
-	public static void switchScene(String fxmlFile, AnchorPane appContainer) {
+	public void setCtx(AnchorPane appContainer) {
+		this.appContainer = appContainer;
+	}
+	
+	public void switchScene(String fxmlFile) {
 		fxmlFile += ".fxml";
 
 		try {
 			System.out.println(fxmlFile);
-			AnchorPane loadedPane = FXMLLoader.load(ClassLoader.getSystemResource(fxmlFile));
+			AnchorPane loadedPane = FXMLLoader.load(getClass().getResource(fxmlFile));
 			appContainer.getChildren().add(loadedPane);
 		} catch (IOException e) {
 			e.printStackTrace();
