@@ -48,7 +48,6 @@ public class LoginFormController{
 		    //start the application
 		    MainApp app = new MainApp();
 		    Stage mainAppStage = new Stage();
-		    mainAppStage.setTitle("ПриложениеТО");
 		    app.start(mainAppStage);
 		    
 		    //write a properties file with user information that will be shown in the app
@@ -59,21 +58,16 @@ public class LoginFormController{
 		    try {
 		    	OutputStream out = new FileOutputStream(file);
 	            session.store(out, null);
-	        } catch (FileNotFoundException e) {
+	        } catch (Exception e) {
 				e.printStackTrace();	// show where it all went wrong 
 				
 				// display a message to the end user
-				Alert alert = new Alert(AlertType.ERROR, "Възникна проблем при влизането.");
-				alert.setTitle("Грешка");
-			} catch (IOException e) {
-				e.printStackTrace();
-
-				Alert alert = new Alert(AlertType.ERROR, "Възникна проблем при влизането.");
-				alert.setTitle("Грешка");
+				Alert alert = new Alert(AlertType.ERROR, "Р’СЉР·РЅРёРєРЅР° РіСЂРµС€РєР° РїСЂРё РІР»РёР·Р°РЅРµ.");
+				alert.setTitle("Р“СЂРµС€РєР°");
 			}
 		} else {
-			Alert alert = new Alert(AlertType.ERROR, "Въвели сте грешни данни!");
-			alert.setTitle("Грешка");
+			Alert alert = new Alert(AlertType.ERROR, "Р’СЉРІРµРґРµРЅРё СЃР° РЅРµРїСЂР°РІРёР»РЅРё РґР°РЅРЅРё!");
+			alert.setTitle("РќРµРїСЂР°РІРёР»РЅРё РґР°РЅРЅРё");
 
 			alert.showAndWait();
 		}

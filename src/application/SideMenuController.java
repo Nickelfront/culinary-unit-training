@@ -32,15 +32,19 @@ import javafx.stage.Stage;
 public class SideMenuController implements Initializable {
 
 	@FXML
-	JFXButton homeBtn;
-	@FXML
-	JFXButton clientsBtn;
-	@FXML
-	JFXButton exitBtn;
-	@FXML
 	ImageView userImageHolder;
 	@FXML 
 	Label userName;
+	@FXML
+	JFXButton homeBtn;
+	@FXML
+	JFXButton clientsBtn;
+	@FXML 
+	JFXButton coursesBtn;
+	@FXML 
+	JFXButton mentorsBtn;
+	@FXML
+	JFXButton exitBtn;
 
 	
 	@Override
@@ -75,20 +79,35 @@ public class SideMenuController implements Initializable {
 		
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 		
-		sceneLoader.switchScene("About");
+		sceneLoader.switchScene("Clients");
+	}
+
+	@FXML public void openCourses() {
+		SceneLoader sceneLoader = SceneLoader.getInstance();
+		
+		sceneLoader.switchScene("Courses");
+		
+	}
+	
+	@FXML public void openMentors() {
+		SceneLoader sceneLoader = SceneLoader.getInstance();
+		
+		sceneLoader.switchScene("Mentors");
 	}
 
 	@FXML
 	public void exitApplication() {
-		ButtonType yes = new ButtonType("�����", ButtonData.OK_DONE);
-		ButtonType no = new ButtonType("�����", ButtonData.CANCEL_CLOSE);
+		ButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);
+		ButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
 		
-		Alert alert = new Alert(AlertType.CONFIRMATION, "������� �� ���, �� ������ �� ���������?", yes, no);
-		alert.setTitle("�����");
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да излезете?", yes, no);
+		alert.setTitle("Изход");
 		alert.showAndWait();
 		if (alert.getResult().equals(yes)) {
 			Stage stage = (Stage) exitBtn.getScene().getWindow();
 			stage.close();
 		}
 	}
+
+
 }
