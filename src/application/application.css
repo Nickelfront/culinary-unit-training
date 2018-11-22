@@ -2,8 +2,10 @@
 	-fx-background-color:  #DCEDC8;
 }
 .home {
-	-fx-background-image: url("../resources/logo-bg.png");
-    -fx-background-size: 500 590;
+        -fx-background-image: url("../resources/logo-bg.png");
+        -fx-background-size: 360 227;
+        -fx-background-repeat:no-repeat;
+        -fx-background-position:center;
 }
 
 .side-menu {
