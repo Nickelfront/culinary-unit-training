@@ -21,6 +21,7 @@ public class HomeController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println(aboutHyperlink.getParent());
 	}
 
 	@FXML
@@ -30,13 +31,13 @@ public class HomeController implements Initializable {
 		try {
 			aboutRoot = (Parent) fxmlLoader.load();
 			Stage stage = new Stage();
-			stage.setTitle("Относно");
+			stage.setTitle("РћС‚РЅРѕСЃРЅРѕ");
 			stage.setScene(new Scene(aboutRoot));
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 			
-			Alert alert = new Alert(AlertType.ERROR, "Възникна грешка.");
+			Alert alert = new Alert(AlertType.ERROR, "Р’СЉР·РЅРёРєРЅР° РіСЂРµС€РєР°.");
 			alert.showAndWait();
 			if (alert.getResult() != null) {
 				System.exit(1);

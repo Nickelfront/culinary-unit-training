@@ -1,21 +1,26 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .anchor-pane {
-	-fx-background-color:  #f2e6e3;
+	-fx-background-color:  #DCEDC8;
+}
+.home {
+	-fx-background-image: url("../resources/logo-bg.png");
+    -fx-background-size: 500 590;
 }
 
 .side-menu {
-	-fx-background-color:  #666;
+	-fx-background-color:  #33691E;
 }
-
-.hamburger:hover {
-	-fx-color: #333;
+.side-menu-button {
+	-fx-background-color: #33691E;
 }
 
 .about-link {
 	-fx-border-style: none;
-	-fx-color: #000;
 }
 
 .about-link:hover {
 	-fx-underline: false;
+}
+
+.tab {
+	-fx-color: green; 
 }

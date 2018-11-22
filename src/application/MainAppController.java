@@ -7,13 +7,12 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MainAppController implements Initializable {
@@ -26,6 +25,8 @@ public class MainAppController implements Initializable {
     
     @FXML
     private AnchorPane appContainer;
+
+	@FXML HBox draggableArea;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,14 +36,12 @@ public class MainAppController implements Initializable {
 			sideMenu.setMaxWidth(box.getWidth());
 			sideMenu.setSidePane(box);
 			
-			AnchorPane sidePanel = (AnchorPane) box.getChildren().get(0);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		SceneLoader sceneLoader = SceneLoader.getInstance();
-		sceneLoader.setCtx(appContainer);
+		sceneLoader.setContext(appContainer);
 		sceneLoader.switchScene("Home");
     }
 

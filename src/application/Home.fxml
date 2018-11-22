@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="619.0" styleClass="home" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <children>
       <Hyperlink fx:id="aboutHyperlink" layoutX="220.0" layoutY="494.0" onAction="#aboutOnClick" styleClass="about-link" text="Относно приложението" />
-      <ImageView fitHeight="339.0" fitWidth="504.0" layoutX="48.0" layoutY="98.0" pickOnBounds="true" smooth="false">
-         <image>
-            <Image url="@../resources/logo.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

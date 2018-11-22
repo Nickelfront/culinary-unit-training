@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="590.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CoursesController">
+   <children>
+      <HBox prefHeight="483.0" prefWidth="721.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <TabPane prefHeight="44.0" prefWidth="1040.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Курсове">
+                     <content>
+                        <TableView fx:id="coursesTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="67.0" resizable="false" text="ID" />
+                            <TableColumn fx:id="titleColumn" minWidth="-1.0" prefWidth="128.0" resizable="false" text="Име на курса" />
+                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="116.0" resizable="false" text="Описание" />
+                              <TableColumn fx:id="startDateColumn" minWidth="-1.0" prefWidth="96.0" resizable="false" text="Начална дата" />
+                              <TableColumn fx:id="endDateColumn" minWidth="-1.0" prefWidth="110.0" resizable="false" text="Крайна дата" />
+                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="118.0" resizable="false" text="Свободни места" />
+                              <TableColumn fx:id="priceColumn" prefWidth="125.0" resizable="false" text="Цена" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                <Tab text="Нов таб" />
+              </tabs>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TabPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
