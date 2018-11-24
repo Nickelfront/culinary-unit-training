@@ -2,8 +2,6 @@ package entity;
 
 public class Client {
 
-	private static int idCount = 0;
-	
 	private int clientId;
 	private String firstName;
 	private String lastName;
@@ -13,8 +11,8 @@ public class Client {
 	
 	public Client() {}
 	
-	public Client(String firstName, String lastName, int age, String email, String phone) {
-		this.clientId = ++idCount;
+	public Client(int clientId, String firstName, String lastName, int age, String email, String phone) {
+		this.clientId = clientId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;

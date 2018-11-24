@@ -11,8 +11,8 @@ public class Mentor {
 
 	public Mentor() {}
 	
-	public Mentor(String firstName, String lastName, String email, String phone, double salary) {
-		super();
+	public Mentor(int mentorId, String firstName, String lastName, String email, String phone, double salary) {
+		this.mentorId = mentorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
