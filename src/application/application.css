@@ -8,6 +8,10 @@
         -fx-background-position:center;
 }
 
+.draggable:hover {
+	-fx-cursor: move;
+}
+
 .side-menu {
 	-fx-background-color:  #33691E;
 }

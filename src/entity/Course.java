@@ -17,6 +17,17 @@ public class Course {
 
 	public Course() {}
 
+	public Course(int courseId, String title, Date startDate, Date endDate, int availableSpots, double price,
+			String description) {
+		this.courseId = courseId;
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.availableSpots = availableSpots;
+		this.price = price;
+		this.description = description;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -67,6 +78,10 @@ public class Course {
 
 	public int getCourseId() {
 		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 }

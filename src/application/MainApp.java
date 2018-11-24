@@ -2,13 +2,14 @@ package application;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXDrawer;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -26,7 +27,25 @@ public class MainApp extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setResizable(false);
 			stage.initStyle(StageStyle.UNDECORATED);
-			HBox draggableArea = (HBox) root.getChildren().get(0);
+			JFXDrawer draggableArea = (JFXDrawer) root.getChildren().get(0);
+	
+			draggableArea.close();
+			
+			draggableArea.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					draggableArea.open();
+					draggableArea.setStyle("-fx-background-color: #33691E");
+				}
+			});
+
+			draggableArea.setOnMouseExited(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					draggableArea.close();
+				}
+			});
+			
 			draggableArea.setOnMousePressed(new EventHandler<MouseEvent>() {
 	            @Override
 	            public void handle(MouseEvent event) {
