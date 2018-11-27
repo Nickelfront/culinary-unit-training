@@ -60,10 +60,15 @@ public class SideMenuController implements Initializable {
 		}
 
 		String userPicturePath = session.getProperty("userPicture");
-		Image userPicture = new Image("file:" + userPicturePath);
-		userImageHolder.setImage(userPicture);
+//		System.out.println(userPicturePath);
+		File file = new File(userPicturePath);
+		file.getAbsolutePath();
+//		Image userPicture = new Image(getClass().getResourceAsStream(userPicturePath));
+//		userImageHolder.setImage(userPicture);  //TODO: find a way to load picture path from property file
 
 		userName.setText(session.getProperty("loggedUser"));
+		userName.setStyle("-fx-stroke: #000");
+		userName.setStyle("-fx-stroke-width: 2px");
 		
 	}
 
@@ -73,6 +78,7 @@ public class SideMenuController implements Initializable {
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 
 		sceneLoader.switchScene("Home");
+		sceneLoader.setContentLabel("");
 	}
 
 	@FXML public void openClients() {
@@ -80,19 +86,21 @@ public class SideMenuController implements Initializable {
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 		
 		sceneLoader.switchScene("Clients");
+		sceneLoader.setContentLabel("Клиенти");
 	}
 
 	@FXML public void openCourses() {
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 		
 		sceneLoader.switchScene("Courses");
-		
+		sceneLoader.setContentLabel("Курсове");
 	}
 	
 	@FXML public void openMentors() {
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 		
 		sceneLoader.switchScene("Mentors");
+		sceneLoader.setContentLabel("Ментори");
 	}
 
 	@FXML

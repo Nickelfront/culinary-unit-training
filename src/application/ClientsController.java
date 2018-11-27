@@ -1,27 +1,24 @@
 package application;
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
 
 import entity.Client;
+import helpers.DateManager;
 import helpers.TableFactory;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
-import javafx.collections.transformation.SortedList;
+import helpers.Validator;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.util.Pair;
 
 public class ClientsController implements Initializable {
 
@@ -45,7 +42,7 @@ public class ClientsController implements Initializable {
 	@FXML
 	private TextField lastName;
 	@FXML
-	private TextField age;
+	DatePicker birthDate;
 	@FXML
 	private TextField email;
 	@FXML
@@ -67,82 +64,62 @@ public class ClientsController implements Initializable {
 
 	@FXML
 	private void handleAddClient(ActionEvent event) {
-		try {
-			int clientAge = Integer.parseInt(this.age.getText());
-			String clientEmail = email.getText();
-			String clientPhoneNumber = phone.getText();
-		
-			if (!validateEmail(clientEmail)) {
-				Alert al = new Alert(Alert.AlertType.INFORMATION);
-				al.setContentText("Невалиден e-Mail!");
-				al.show();
-				return;
-			}
-			if (!validateAge(clientAge)) {
-				Alert al = new Alert(Alert.AlertType.INFORMATION);
-				al.setContentText("Клиентът трябва да е лице на възраст над 16 години!");
-				al.show();
-				return;
-			}
-			if (!validatePhoneNumber(clientPhoneNumber)) {
-				Alert al = new Alert(Alert.AlertType.INFORMATION);
-				al.setContentText("Невалиден телефонен номер.");
-				al.show();
-				return;
-			}
-			
-			Client client = new Client(incrementID(), firstName.getText(), lastName.getText(), clientAge,
-					email.getText(), phone.getText());
+		LocalDate birthDateInput = birthDate.getValue();
+		String clientEmail = email.getText();
+		String clientPhoneNumber = phone.getText();
 
-			clientsTable.getItems().add(client);
-
-			firstName.setText("");
-			lastName.setText("");
-			age.setText("");
-			email.setText("");
-			phone.setText("");
-		} catch (NumberFormatException e) {
+		if (!Validator.validateEmail(clientEmail)) {
 			Alert al = new Alert(Alert.AlertType.INFORMATION);
-			al.setContentText("Възрастта трябва да е число!");
-			age.setText("");
-			al.show(); // TODO: Dont enter the age manually, but select date of birth
+			al.setContentText("Невалиден e-Mail!");
+			Validator.setFieldInputAsInvalid(email);
+			al.show();
+			return;
 		}
+		if (!Validator.validateAge(birthDateInput)) {
+			Alert al = new Alert(Alert.AlertType.INFORMATION);
+			al.setContentText("Клиентът трябва да е лице на възраст над 16 години!");
+			al.show();
+			return;
+		}
+		if (!Validator.validatePhoneNumber(clientPhoneNumber)) {
+			Alert al = new Alert(Alert.AlertType.INFORMATION);
+			al.setContentText("Невалиден телефонен номер.");
+			Validator.setFieldInputAsInvalid(phone);
+			al.show();
+			return;
+		}
+
+		Client client = new Client(incrementID(), firstName.getText(), lastName.getText(), getClientAge(birthDateInput),
+				email.getText(), phone.getText());
+
+		clientsTable.getItems().add(client);
+
+		firstName.setText("");
+		lastName.setText("");
+		birthDate.setValue(null);
+		email.setText("");
+		phone.setText("");
 	}
 
 	@FXML
 	private void handleClearForm(ActionEvent event) {
 		firstName.setText("");
 		lastName.setText("");
-		age.setText("");
+		birthDate.setValue(null);
 		email.setText("");
-		phone.setText("");
+		phone.setText(""); //TODO: if border has become red from previous validation attempt, reset it.
 	}
 
+	private int getClientAge(LocalDate birthDateInput) {
+		Date birthDate = Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault())));
+		int age = DateManager.getYearDifference(birthDate);
+		return age;
+	}
 
 	private int incrementID() {
 		int lastItemIndex = clientsTable.getItems().size() - 1;
 		int lastItemID = clientsTable.getItems().get(lastItemIndex).getClientId();
 
 		return ++lastItemID;
-	}
-
-	private boolean validatePhoneNumber(String phoneNumber) {
-		String regex = "0[\\d]{9}";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(phoneNumber);
-		
-		return matcher.matches();
-	}
-	
-	private boolean validateAge(int age) {
-		return age > 16;
-	}
-	
-	private boolean validateEmail(String email) {
-		String regex = "[\\w\\d\\-]+@[\\w\\d]+\\.[\\w]{2,}";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(email);
-		
-		return matcher.matches();
 	}
 }

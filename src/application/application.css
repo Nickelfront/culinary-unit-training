@@ -1,6 +1,17 @@
-.anchor-pane {
-	-fx-background-color:  #DCEDC8;
+.anchor-pane, .toolbar {
+	-fx-background-color:  #FFF3E0;
 }
+
+.label-container {
+	-fx-background-color: linear-gradient(/* #FFB74D 0%,*/ #FFCC80 0%, #FFE0B2 50%, #FFF3E0 100%);
+}
+
+.content-label {
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #212121;
+}
+
 .home {
         -fx-background-image: url("../resources/logo-bg.png");
         -fx-background-size: 360 227;
@@ -8,15 +19,8 @@
         -fx-background-position:center;
 }
 
-.draggable:hover {
-	-fx-cursor: move;
-}
-
 .side-menu {
-	-fx-background-color:  #33691E;
-}
-.side-menu-button {
-	-fx-background-color: #33691E;
+	-fx-background-color: #E65100;
 }
 
 .about-link {
@@ -26,7 +30,21 @@
 .about-link:hover {
 	-fx-underline: false;
 }
+.tab {    
+	-fx-padding: 10 20 10 20;
+	-fx-background-color: #FFE0B2;
+	-fx-tab-min-height: 35px;
+	-fx-tab-max-height: 45px;
+	-fx-font-size: 20px;
+}
 
-.tab {
-	-fx-color: green; 
+.tab:selected {
+	-fx-border-style: none;
+    -fx-background-color: #FFB74D;
+}
+/*remove gray background on tabs */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+    /*-fx-effect: null;
+    -fx-opacity: 0;*/
 }

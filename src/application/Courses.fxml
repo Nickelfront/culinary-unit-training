@@ -12,30 +12,50 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CoursesController">
+<AnchorPane prefHeight="500.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CoursesController">
    <children>
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="483.0" prefWidth="726.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="466.0" prefWidth="902.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <children>
             <TabPane prefHeight="44.0" prefWidth="1040.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Курсове">
+                <Tab text="Преглед">
                      <content>
-                        <TableView fx:id="coursesTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false">
+                        <TableView fx:id="coursesTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false" styleClass="table">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="67.0" resizable="false" text="ID" />
-                            <TableColumn fx:id="titleColumn" minWidth="-1.0" prefWidth="128.0" resizable="false" text="Име на курса" />
-                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="116.0" resizable="false" text="Описание" />
-                              <TableColumn fx:id="startDateColumn" minWidth="-1.0" prefWidth="96.0" resizable="false" text="Начална дата" />
-                              <TableColumn fx:id="endDateColumn" minWidth="-1.0" prefWidth="110.0" resizable="false" text="Крайна дата" />
-                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="118.0" resizable="false" text="Свободни места" />
-                              <TableColumn fx:id="priceColumn" prefWidth="90.0" resizable="false" text="Цена" />
+                            <TableColumn fx:id="titleColumn" minWidth="-1.0" prefWidth="142.0" resizable="false" text="Име на курса" />
+                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="167.0" resizable="false" text="Описание" />
+                              <TableColumn fx:id="startDateColumn" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Начална дата" />
+                              <TableColumn fx:id="endDateColumn" minWidth="-1.0" prefWidth="113.0" resizable="false" text="Крайна дата" />
+                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
+                              <TableColumn fx:id="priceColumn" prefWidth="104.0" resizable="false" text="Цена" />
                           </columns>
                         </TableView>
                      </content>
                   </Tab>
-                <Tab text="Нов таб" />
+                <Tab text="Нов курс">
+                     <content>
+                        <Pane>
+                           <children>
+                              <TextField fx:id="courseTitle" layoutX="62.0" layoutY="85.0" prefHeight="29.0" prefWidth="305.0" promptText="Име на курс" />
+                              <TextArea fx:id="courseDescription" layoutX="62.0" layoutY="121.0" prefHeight="100.0" prefWidth="306.0" promptText="Описание" />
+                              <DatePicker fx:id="courseStartDate" layoutX="62.0" layoutY="230.0" prefHeight="29.0" prefWidth="306.0" promptText="Начална дата" />
+                              <DatePicker fx:id="courseEndDate" layoutX="62.0" layoutY="267.0" prefHeight="29.0" prefWidth="306.0" promptText="Крайна дата" />
+                              <TextField fx:id="courseMaxAvailableSpots" layoutX="62.0" layoutY="304.0" prefHeight="29.0" prefWidth="306.0" promptText="Макс. свободни места" />
+                              <TextField fx:id="coursePrice" layoutX="62.0" layoutY="341.0" prefHeight="29.0" prefWidth="306.0" promptText="Цена" />
+                              <Label layoutX="156.0" layoutY="43.0" text="Нов курс">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="58.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleAddCourses" prefHeight="29.0" prefWidth="135.0" text="Добави" />
+                              <Button layoutX="234.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="134.0" text="Изчисти" />
+                           </children>
+                        </Pane>
+                     </content></Tab>
               </tabs>
                <HBox.margin>
                   <Insets />
@@ -43,18 +63,5 @@
             </TabPane>
          </children>
       </HBox>
-      <TextField fx:id="courseTitle" layoutX="795.0" layoutY="93.0" prefHeight="29.0" prefWidth="209.0" promptText="Име на курс" />
-      <TextArea fx:id="courseDescription" layoutX="795.0" layoutY="129.0" prefHeight="100.0" prefWidth="209.0" promptText="Описание" />
-      <DatePicker fx:id="courseStartDate" layoutX="795.0" layoutY="238.0" prefHeight="29.0" prefWidth="209.0" promptText="Начална дата" />
-      <DatePicker fx:id="courseEndDate" layoutX="795.0" layoutY="275.0" prefHeight="29.0" prefWidth="209.0" promptText="Крайна дата" />
-      <TextField fx:id="courseMaxAvailableSpots" layoutX="795.0" layoutY="312.0" prefHeight="29.0" prefWidth="209.0" promptText="Макс. свободни места" />
-      <TextField fx:id="coursePrice" layoutX="795.0" layoutY="349.0" prefHeight="29.0" prefWidth="209.0" promptText="Цена" />
-      <Label layoutX="846.0" layoutY="38.0" text="Нов курс">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Button layoutX="795.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleAddCourses" prefHeight="29.0" prefWidth="98.0" text="Добави" />
-      <Button layoutX="906.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="98.0" text="Изчисти" />
    </children>
 </AnchorPane>

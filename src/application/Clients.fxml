@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -10,29 +11,53 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ClientsController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ClientsController">
    <children>
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="443.0" prefWidth="687.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="466.0" prefWidth="902.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <children>
-            <TabPane prefHeight="421.0" prefWidth="1078.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="466.0" prefWidth="915.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Клиенти">
+                <Tab text="Преглед">
                      <content>
-                        <TableView fx:id="clientsTable" minWidth="400.0" prefHeight="379.0" prefWidth="1078.0" snapToPixel="false">
+                        <TableView fx:id="clientsTable" minWidth="400.0" prefHeight="379.0" prefWidth="1078.0" snapToPixel="false" styleClass="table">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="69.0" resizable="false" text="ID" />
-                            <TableColumn fx:id="firstNameColumn" minWidth="-1.0" prefWidth="113.0" resizable="false" text="Име" />
-                              <TableColumn fx:id="lastNameColumn" minWidth="-1.0" prefWidth="135.0" resizable="false" text="Фамилия" />
-                              <TableColumn fx:id="ageColumn" minWidth="-1.0" prefWidth="61.0" resizable="false" text="Възраст" />
-                              <TableColumn fx:id="phoneColumn" minWidth="-1.0" prefWidth="114.0" resizable="false" text="Телефон" />
-                              <TableColumn fx:id="emailColumn" maxWidth="203.0" minWidth="-1.0" prefWidth="194.0" resizable="false" text="E-Mail" />
+                            <TableColumn fx:id="idColumn" prefWidth="69.0" resizable="false" styleClass=".column-header" text="ID" />
+                            <TableColumn fx:id="firstNameColumn" minWidth="-1.0" prefWidth="133.0" resizable="false" styleClass=".column-header" text="Име" />
+                              <TableColumn fx:id="lastNameColumn" minWidth="-1.0" prefWidth="210.0" resizable="false" styleClass=".column-header" text="Фамилия" />
+                              <TableColumn fx:id="ageColumn" minWidth="-1.0" prefWidth="124.0" resizable="false" styleClass=".column-header" text="Възраст" />
+                              <TableColumn fx:id="phoneColumn" minWidth="-1.0" prefWidth="138.0" resizable="false" styleClass=".column-header" text="Телефон" />
+                              <TableColumn fx:id="emailColumn" maxWidth="290.0" minWidth="-1.0" prefWidth="228.0" resizable="false" styleClass=".column-header" text="E-Mail" />
                           </columns>
                         </TableView>
                      </content>
                   </Tab>
-                <Tab text="Нов таб" />
+                <Tab text="Нов клиент">
+                     <content>
+                        <Pane prefHeight="499.0" prefWidth="786.0">
+                           <children>
+                              <Label layoutX="156.0" layoutY="43.0" prefHeight="53.0" prefWidth="128.0" text="Нов клиент">
+                                 <font>
+                                    <Font name="Agency FB Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="firstName" layoutX="62.0" layoutY="118.0" prefHeight="29.0" prefWidth="335.0" promptText="Име" />
+                              <TextField fx:id="lastName" layoutX="63.0" layoutY="154.0" prefHeight="29.0" prefWidth="334.0" promptText="Фамилия" />
+                              <DatePicker fx:id="birthDate" layoutX="62.0" layoutY="192.0" prefHeight="29.0" prefWidth="335.0" promptText="Рождена дата" />
+                              <TextField fx:id="phone" layoutX="62.0" layoutY="229.0" prefHeight="29.0" prefWidth="335.0" promptText="Телефон" />
+                              <TextField fx:id="email" layoutX="62.0" layoutY="266.0" prefHeight="29.0" prefWidth="335.0" promptText="E-Mail" />
+                              <Button layoutX="62.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleAddClient" prefHeight="29.0" prefWidth="115.0" text="Добави" />
+                              <Button layoutX="281.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="115.0" text="Изчисти" />
+                           </children>
+                        </Pane>
+                     </content></Tab>
+                  <Tab text="Курсове">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
               </tabs>
                <HBox.margin>
                   <Insets />
@@ -40,17 +65,5 @@
             </TabPane>
          </children>
       </HBox>
-      <Label layoutX="823.0" layoutY="14.0" prefHeight="53.0" prefWidth="149.0" text="Нов Клиент">
-         <font>
-            <Font name="Agency FB Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="firstName" layoutX="777.0" layoutY="67.0" prefHeight="29.0" prefWidth="235.0" promptText="Име" />
-      <TextField fx:id="lastName" layoutX="777.0" layoutY="103.0" prefHeight="29.0" prefWidth="235.0" promptText="Фамилия" />
-      <TextField fx:id="age" layoutX="777.0" layoutY="139.0" prefHeight="29.0" prefWidth="235.0" promptText="Възраст" />
-      <TextField fx:id="phone" layoutX="777.0" layoutY="176.0" prefHeight="29.0" prefWidth="235.0" promptText="Телефон" />
-      <TextField fx:id="email" layoutX="777.0" layoutY="212.0" prefHeight="29.0" prefWidth="235.0" promptText="Е-мейл" />
-      <Button layoutX="777.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleAddClient" prefHeight="29.0" prefWidth="115.0" text="Добави" />
-      <Button layoutX="897.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="115.0" text="Изчисти" />
    </children>
 </AnchorPane>
