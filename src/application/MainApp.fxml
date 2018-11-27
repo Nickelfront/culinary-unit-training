@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1260.0" styleClass="anchor-pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1070.0" styleClass="anchor-pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainAppController">
 	<children>
-      <JFXDrawer fx:id="draggableArea" minWidth="1260.0" prefHeight="25.0" prefWidth="1260.0" styleClass="draggable" />
 		<JFXDrawer fx:id="sideMenu" defaultDrawerSize="190.0" layoutY="-1.0" prefHeight="820.0" prefWidth="142.0" />
-		<JFXHamburger fx:id="showMenu" layoutX="20.0" layoutY="20.0" onMouseEntered="#hamburgerHover" onMousePressed="#hamburgerClick" prefHeight="31.0" prefWidth="30.0" styleClass="hamburger" />
-      <AnchorPane fx:id="appContainer" layoutX="168.0" layoutY="50.0" prefHeight="600.0" prefWidth="1060.0" />
+      <AnchorPane fx:id="appContainer" layoutX="165.0" layoutY="58.0" prefHeight="500.0" prefWidth="935.0" />
+      <AnchorPane fx:id="labelContainer" layoutX="160.0" layoutY="-5.0" prefHeight="61.0" prefWidth="935.0" styleClass="label-container">
+         <children>
+            <Label fx:id="contentLabel" layoutX="32.0" layoutY="22.0" prefHeight="17.0" prefWidth="110.0" styleClass="content-label" text="Label" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
 	</children>
 </AnchorPane>

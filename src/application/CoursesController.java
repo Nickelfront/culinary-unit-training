@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import entity.Course;
 import helpers.TableFactory;
+import helpers.Validator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -72,7 +73,7 @@ public class CoursesController implements Initializable {
 
 		if (!validateDates(courseStartDate.getValue(), courseEndDate.getValue())) {
 			Alert al = new Alert(Alert.AlertType.INFORMATION);
-			al.setContentText("Началната дата трябва да е поне ден преди крайната.");
+			al.setContentText("Невалиден период от време.");
 			al.show();
 			return;
 		}
@@ -107,6 +108,6 @@ public class CoursesController implements Initializable {
 	}
 	
 	private boolean validateDates(LocalDate startDate, LocalDate endDate) {
-		return startDate.compareTo(endDate) == 1;
+		return startDate.compareTo(endDate) > -1;
 	}
 }

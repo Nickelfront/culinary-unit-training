@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="820.0" prefWidth="1100.0" styleClass="home" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="935.0" styleClass="home" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <children>
-      <Hyperlink fx:id="aboutHyperlink" layoutX="480.0" layoutY="795.0" onAction="#aboutOnClick" styleClass="about-link" text="Относно приложението" />
+      <Hyperlink fx:id="aboutHyperlink" layoutX="391.0" layoutY="459.0" onAction="#aboutOnClick" styleClass="about-link" text="Относно приложението">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/info.png" />
+               </image>
+            </ImageView>
+         </graphic></Hyperlink>
+      <Label layoutX="181.0" layoutY="5.0" prefHeight="97.0" prefWidth="307.0" text="Добре дошли, ">
+         <font>
+            <Font name="Bookman Old Style" size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="username" layoutX="378.0" layoutY="81.0" text="username">
+         <font>
+            <Font name="Baskerville Old Face" size="35.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

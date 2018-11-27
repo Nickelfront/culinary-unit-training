@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
@@ -11,12 +12,16 @@
       <Insets />
    </opaqueInsets>
    <children>
-      <Text layoutX="14.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Това приложение е разработено с образователна цел. Всички данни, използвани в това приложение, са фиктивни и нямат общо с действителността." wrappingWidth="477.9830722808838" />
-      <JFXButton fx:id="btnClose" defaultButton="true" layoutX="363.0" layoutY="441.0" onAction="#closeAboutWindow" prefHeight="45.0" prefWidth="123.0" style="-fx-background-color: #755757;" text="Затвори" />
-      <Text layoutX="14.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Разработили:" />
-      <Text layoutX="14.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Божидар Иванов Иванов, ф.№ 109620, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
-      <Text layoutX="14.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Никол Евгениева Панайотова, ф.№ 109556, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
+      <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Това приложение е разработено с образователна цел. Всички данни, използвани в това приложение, са фиктивни и нямат общо с действителността." wrappingWidth="477.9830722808838" />
+      <JFXButton fx:id="btnClose" defaultButton="true" layoutX="363.0" layoutY="441.0" onAction="#closeAboutWindow" prefHeight="45.0" prefWidth="123.0" style="-fx-background-color: #FB8C00;" text="Затвори" />
+      <Text layoutX="11.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Разработили:" />
+      <Text layoutX="11.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Божидар Иванов Иванов, ф.№ 109620, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
+      <Text layoutX="11.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Никол Евгениева Панайотова, ф.№ 109556, 26 група, спец. Информатика" wrappingWidth="477.9830724000931" />
       <Label layoutX="15.0" layoutY="464.0" text="2018 - Всички права запазени." />
-      <Label layoutX="15.0" layoutY="153.0" text="DISCLAIMER" />
+      <Label layoutX="15.0" layoutY="38.0" text="DISCLAIMER" />
+      <Text layoutX="15.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREDITS:" />
+      <Text layoutX="15.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphics: " />
+      <Hyperlink fx:id="freepikLink" layoutX="87.0" layoutY="237.0" onAction="#onClickFirstLink" styleClass="about-hyperlink" text="Freepik" />
+      <Hyperlink fx:id="flaticonLink" layoutX="146.0" layoutY="237.0" onAction="#onClickSecondLink" styleClass="about-hyperlink" text="FlatIcon" />
    </children>
 </AnchorPane>

@@ -5,18 +5,18 @@ public class Mentor {
 	private int mentorId;
 	private String firstName;
 	private String lastName;
-	private String email;
 	private String phone;
+	private String email;
 	private double salary;
 
 	public Mentor() {}
 	
-	public Mentor(int mentorId, String firstName, String lastName, String email, String phone, double salary) {
+	public Mentor(int mentorId, String firstName, String lastName, String phone, String email, double salary) {
 		this.mentorId = mentorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 		this.phone = phone;
+		this.email = email;
 		this.salary = salary;
 	}
 

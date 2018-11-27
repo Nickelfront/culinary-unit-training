@@ -37,8 +37,9 @@ public class LoginFormController{
 	
 	@FXML
 	public void loginAttempt() {
-		String username = usernameInput.getText();
-		String password = passwordInput.getText();
+		//remove case sensitivity
+		String username = usernameInput.getText().toLowerCase();
+		String password = passwordInput.getText().toLowerCase();
 
 		//if the login entries are correct
 		if (username.equals("admin") && password.equals("123")) {
