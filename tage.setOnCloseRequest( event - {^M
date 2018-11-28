@@ -1,0 +1,476 @@
+warning: LF will be replaced by CRLF in src/application/SideMenu.fxml.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/session.properties b/session.properties[m
+[1mindex 421f1ee..147609d 100644[m
+[1m--- a/session.properties[m
+[1m+++ b/session.properties[m
+[36m@@ -1,3 +1,3 @@[m
+[31m-#Tue Nov 27 23:29:44 EET 2018[m
+[31m-userPicture=admin.png[m
+[32m+[m[32m#Wed Nov 28 12:30:55 EET 2018[m
+[32m+[m[32muserPicture=admin-icon.png[m
+ loggedUser=admin[m
+[1mdiff --git a/src/application/AboutController.java b/src/application/AboutController.java[m
+[1mindex 91797d1..3ad338b 100644[m
+[1m--- a/src/application/AboutController.java[m
+[1m+++ b/src/application/AboutController.java[m
+[36m@@ -5,14 +5,11 @@[m [mimport java.util.ResourceBundle;[m
+ [m
+ import com.jfoenix.controls.JFXButton;[m
+ [m
+[31m-import javafx.application.Application;[m
+[31m-import javafx.application.HostServices;[m
+ import javafx.fxml.FXML;[m
+ import javafx.fxml.Initializable;[m
+[31m-import javafx.scene.image.Image;[m
+[32m+[m[32mimport javafx.scene.control.Hyperlink;[m
+ import javafx.scene.layout.AnchorPane;[m
+ import javafx.stage.Stage;[m
+[31m-import javafx.scene.control.Hyperlink;[m
+ [m
+ public class AboutController implements Initializable {[m
+ [m
+[1mdiff --git a/src/application/CoursesController.java b/src/application/CoursesController.java[m
+[1mindex 99885b7..7c52ce6 100644[m
+[1m--- a/src/application/CoursesController.java[m
+[1m+++ b/src/application/CoursesController.java[m
+[36m@@ -9,16 +9,14 @@[m [mimport java.util.ResourceBundle;[m
+ [m
+ import entity.Course;[m
+ import helpers.TableFactory;[m
+[31m-import helpers.Validator;[m
+ import javafx.fxml.FXML;[m
+ import javafx.fxml.Initializable;[m
+[32m+[m[32mimport javafx.scene.control.Alert;[m
+[32m+[m[32mimport javafx.scene.control.DatePicker;[m
+ import javafx.scene.control.TableColumn;[m
+ import javafx.scene.control.TableView;[m
+[31m-import javafx.scene.control.cell.PropertyValueFactory;[m
+[31m-import javafx.scene.control.TextField;[m
+ import javafx.scene.control.TextArea;[m
+[31m-import javafx.scene.control.Alert;[m
+[31m-import javafx.scene.control.DatePicker;[m
+[32m+[m[32mimport javafx.scene.control.TextField;[m
+ [m
+ public class CoursesController implements Initializable {[m
+ [m
+[1mdiff --git a/src/application/CulinaryStartup.java b/src/application/CulinaryStartup.java[m
+[1mindex 41deede..e7fa4c2 100644[m
+[1m--- a/src/application/CulinaryStartup.java[m
+[1m+++ b/src/application/CulinaryStartup.java[m
+[36m@@ -1,5 +1,7 @@[m
+ package application;[m
+ [m
+[32m+[m[32mimport helpers.ImageLoader;[m
+[32m+[m[32mimport helpers.StyleSheetLoader;[m
+ import javafx.application.Application;[m
+ import javafx.fxml.FXMLLoader;[m
+ import javafx.scene.Scene;[m
+[36m@@ -13,12 +15,15 @@[m [mpublic class CulinaryStartup extends Application {[m
+ 	public void start(Stage primaryStage) throws Exception {[m
+ 		AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("LoginForm.fxml"));[m
+ 		Scene scene = new Scene(root);[m
+[31m-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());[m
+[31m-[m
+[31m-		Image icon = new Image(getClass().getClassLoader().getResourceAsStream("cooking.png"));[m
+[31m-[m
+[31m-        primaryStage.getIcons().add(icon);[m
+[31m-[m
+[32m+[m[32m//		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());[m
+[32m+[m		[32mStyleSheetLoader styleSheetLoader = new StyleSheetLoader();[m
+[32m+[m		[32mstyleSheetLoader.setContext(scene);[m
+[32m+[m		[32mstyleSheetLoader.loadStyleSheet("application");[m
+[32m+[m[32m//[m[41m		[m
+[32m+[m[32m//		Image icon = ImageLoader.getInstance().loadImage("cooking.png");[m
+[32m+[m[32m//[m
+[32m+[m[32m//        primaryStage.getIcons().add(icon);[m
+[32m+[m[32m//[m
+ 		primaryStage.setTitle("Вход");[m
+ 		primaryStage.setScene(scene);[m
+ 		primaryStage.show();[m
+[1mdiff --git a/src/application/LoginFormController.java b/src/application/LoginFormController.java[m
+[1mindex 46c12b4..06701a8 100644[m
+[1m--- a/src/application/LoginFormController.java[m
+[1m+++ b/src/application/LoginFormController.java[m
+[36m@@ -1,23 +1,17 @@[m
+ package application;[m
+ [m
+ import java.io.File;[m
+[31m-import java.io.FileNotFoundException;[m
+ import java.io.FileOutputStream;[m
+[31m-import java.io.IOException;[m
+ import java.io.OutputStream;[m
+[31m-import java.util.Date;[m
+ import java.util.Properties;[m
+ [m
+ import javafx.event.ActionEvent;[m
+[31m-import javafx.event.Event;[m
+ import javafx.fxml.FXML;[m
+ import javafx.scene.control.Alert;[m
+ import javafx.scene.control.Alert.AlertType;[m
+ import javafx.scene.control.Button;[m
+ import javafx.scene.control.PasswordField;[m
+ import javafx.scene.control.TextField;[m
+[31m-import javafx.scene.input.KeyCode;[m
+[31m-import javafx.scene.input.KeyEvent;[m
+ import javafx.stage.Stage;[m
+ [m
+ public class LoginFormController{[m
+[36m@@ -54,7 +48,9 @@[m [mpublic class LoginFormController{[m
+ 		    //write a properties file with user information that will be shown in the app[m
+ 		    Properties session = new Properties();[m
+ 		    session.put("loggedUser", username);[m
+[31m-		    session.put("userPicture", username + ".png");[m
+[32m+[m		[32m    session.put("userPicture", username + "-icon.png");[m
+[32m+[m[32m//		    session.put("userBackground", username + "-bg.png");[m
+[32m+[m[41m		    [m
+ 		    File file = new File("session.properties");[m
+ 		    try {[m
+ 		    	OutputStream out = new FileOutputStream(file);[m
+[1mdiff --git a/src/application/MainApp.java b/src/application/MainApp.java[m
+[1mindex 5e5827c..150ade8 100644[m
+[1m--- a/src/application/MainApp.java[m
+[1m+++ b/src/application/MainApp.java[m
+[36m@@ -2,9 +2,15 @@[m [mpackage application;[m
+ [m
+ import java.io.IOException;[m
+ [m
+[32m+[m[32mimport helpers.ImageLoader;[m[41m[m
+[32m+[m[32mimport helpers.StyleSheetLoader;[m[41m[m
+ import javafx.application.Application;[m
+ import javafx.fxml.FXMLLoader;[m
+ import javafx.scene.Scene;[m
+[32m+[m[32mimport javafx.scene.control.Alert;[m[41m[m
+[32m+[m[32mimport javafx.scene.control.Alert.AlertType;[m[41m[m
+[32m+[m[32mimport javafx.scene.control.ButtonBar.ButtonData;[m[41m[m
+[32m+[m[32mimport javafx.scene.control.ButtonType;[m[41m[m
+ import javafx.scene.image.Image;[m
+ import javafx.scene.layout.AnchorPane;[m
+ import javafx.stage.Stage;[m
+[36m@@ -18,17 +24,36 @@[m [mpublic class MainApp extends Application {[m
+ 		try {[m
+ 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));[m
+ 			Scene scene = new Scene(root);[m
+[31m-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());[m
+ 			[m
+[31m-			Image icon = new Image(getClass().getClassLoader().getResourceAsStream("cooking.png"));[m
+[32m+[m[32m//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());[m[41m[m
+[32m+[m			[32mStyleSheetLoader styleSheetLoader = new StyleSheetLoader();[m[41m[m
+[32m+[m			[32mstyleSheetLoader.setContext(scene);[m[41m[m
+[32m+[m			[32mstyleSheetLoader.loadStyleSheet("application");[m[41m[m
+[32m+[m[32m//[m[41m			[m
+[32m+[m[41m			[m
+[32m+[m			[32mImage icon = ImageLoader.getInstance().loadImage("cooking.png");[m[41m[m
+ 			stage.getIcons().add(icon);[m
+ 			stage.setResizable(false);[m
+ 			stage.setScene(scene);[m
+ 			stage.setTitle("UberChef - организатор");[m
+ 			stage.show();[m
+[32m+[m[41m			[m
+ 		} catch (IOException e) {[m
+ 			e.printStackTrace();[m
+ 		}[m
+[32m+[m[41m		[m
+[32m+[m		[32mstage.setOnCloseRequest( event -> {[m[41m[m
+[32m+[m			[32mButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);[m[41m[m
+[32m+[m			[32mButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);[m[41m[m
+[32m+[m[41m			[m
+[32m+[m			[32mAlert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да излезете?", yes, no);[m[41m[m
+[32m+[m			[32malert.setTitle("Изход");[m[41m[m
+[32m+[m			[32malert.showAndWait();[m[41m[m
+[32m+[m			[32mif (alert.getResult().equals(yes)) {[m[41m[m
+[32m+[m				[32mstage.close();[m[41m[m
+[32m+[m			[32m} else {[m[41m[m
+[32m+[m				[32mevent.consume();[m[41m[m
+[32m+[m			[32m}[m[41m[m
+[32m+[m		[32m});[m[41m[m
+ 	}[m
+[31m-[m
+ }[m
+[1mdiff --git a/src/application/MentorsController.java b/src/application/MentorsController.java[m
+[1mindex c9d33d8..edcc213 100644[m
+[1m--- a/src/application/MentorsController.java[m
+[1m+++ b/src/application/MentorsController.java[m
+[36m@@ -2,22 +2,16 @@[m [mpackage application;[m
+ [m
+ import java.net.URL;[m
+ import java.util.ResourceBundle;[m
+[31m-import java.util.regex.Matcher;[m
+[31m-import java.util.regex.Pattern;[m
+ [m
+[31m-import javafx.fxml.Initializable;[m
+[31m-import javafx.event.ActionEvent;[m
+[31m-import javafx.fxml.FXML;[m
+[31m-import com.jfoenix.controls.JFXTreeTableView;[m
+[31m-[m
+[31m-import entity.Client;[m
+ import entity.Mentor;[m
+ import helpers.TableFactory;[m
+ import helpers.Validator;[m
+[31m-import javafx.scene.control.TableView;[m
+[31m-import javafx.scene.control.cell.PropertyValueFactory;[m
+[32m+[m[32mimport javafx.event.ActionEvent;[m
+[32m+[m[32mimport javafx.fxml.FXML;[m
+[32m+[m[32mimport javafx.fxml.Initializable;[m
+ import javafx.scene.control.Alert;[m
+ import javafx.scene.control.TableColumn;[m
+[32m+[m[32mimport javafx.scene.control.TableView;[m
+ import javafx.scene.control.TextField;[m
+ [m
+ public class MentorsController implements Initializable {[m
+[1mdiff --git a/src/application/SideMenu.fxml b/src/application/SideMenu.fxml[m
+[1mindex c2e705b..af9aa2f 100644[m
+[1m--- a/src/application/SideMenu.fxml[m
+[1m+++ b/src/application/SideMenu.fxml[m
+[36m@@ -8,6 +8,7 @@[m
+ <?import javafx.scene.image.ImageView?>[m
+ <?import javafx.scene.layout.AnchorPane?>[m
+ <?import javafx.scene.layout.VBox?>[m
+[32m+[m[32m<?import javafx.scene.shape.Line?>[m
+ <?import javafx.scene.text.Font?>[m
+ [m
+ <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="546.0" prefWidth="160.0" styleClass="side-menu" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SideMenuController">[m
+[36m@@ -41,17 +42,21 @@[m
+             </JFXButton>[m
+             <AnchorPane prefHeight="97.0" prefWidth="160.0">[m
+                <children>[m
+[31m-                  <ImageView fitHeight="232.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">[m
+[32m+[m[32m                  <ImageView fx:id="userBg" fitHeight="99.0" fitWidth="160.0" opacity="0.8" pickOnBounds="true">[m
+                      <image>[m
+[31m-                        <Image url="@../resources/user-bg.png" />[m
+[32m+[m[32m                        <Image url="@../resources/admin-bg.png" />[m
+                      </image>[m
+[32m+[m[32m                     <viewport>[m
+[32m+[m[32m                        <Rectangle2D />[m
+[32m+[m[32m                     </viewport>[m
+                   </ImageView>[m
+[32m+[m[32m                  <Line endX="106.0" fill="WHITE" layoutX="53.0" layoutY="100.0" startX="-57.0" stroke="#f57c00" />[m
+                   <ImageView fx:id="userImageHolder" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="21.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">[m
+                      <viewport>[m
+                         <Rectangle2D />[m
+                      </viewport>[m
+                      <image>[m
+[31m-                        <Image url="@../resources/default.png" />[m
+[32m+[m[32m                        <Image url="@../resources/default-avatar.png" />[m
+                      </image>[m
+                   </ImageView>[m
+                   <Label fx:id="userName" layoutX="80.0" layoutY="41.0" text="userName" textFill="WHITE">[m
+[1mdiff --git a/src/application/SideMenuController.java b/src/application/SideMenuController.java[m
+[1mindex 5d3794a..af06ab8 100644[m
+[1m--- a/src/application/SideMenuController.java[m
+[1m+++ b/src/application/SideMenuController.java[m
+[36m@@ -10,11 +10,9 @@[m [mimport java.util.ResourceBundle;[m
+ [m
+ import com.jfoenix.controls.JFXButton;[m
+ [m
+[32m+[m[32mimport helpers.ImageLoader;[m[41m[m
+ import javafx.fxml.FXML;[m
+[31m-import javafx.fxml.FXMLLoader;[m
+ import javafx.fxml.Initializable;[m
+[31m-import javafx.scene.Parent;[m
+[31m-import javafx.scene.SnapshotParameters;[m
+ import javafx.scene.control.Alert;[m
+ import javafx.scene.control.Alert.AlertType;[m
+ import javafx.scene.control.ButtonBar.ButtonData;[m
+[36m@@ -22,31 +20,27 @@[m [mimport javafx.scene.control.ButtonType;[m
+ import javafx.scene.control.Label;[m
+ import javafx.scene.image.Image;[m
+ import javafx.scene.image.ImageView;[m
+[31m-import javafx.scene.image.WritableImage;[m
+[31m-import javafx.scene.paint.Color;[m
+[31m-import javafx.scene.paint.ImagePattern;[m
+[31m-import javafx.scene.shape.Circle;[m
+[31m-import javafx.scene.shape.Rectangle;[m
+ import javafx.stage.Stage;[m
+ [m
+ public class SideMenuController implements Initializable {[m
+ [m
+ 	@FXML[m
+ 	ImageView userImageHolder;[m
+[31m-	@FXML [m
+[32m+[m	[32m@FXML[m[41m[m
+ 	Label userName;[m
+ 	@FXML[m
+ 	JFXButton homeBtn;[m
+ 	@FXML[m
+ 	JFXButton clientsBtn;[m
+[31m-	@FXML [m
+[32m+[m	[32m@FXML[m[41m[m
+ 	JFXButton coursesBtn;[m
+[31m-	@FXML [m
+[32m+[m	[32m@FXML[m[41m[m
+ 	JFXButton mentorsBtn;[m
+ 	@FXML[m
+ 	JFXButton exitBtn;[m
+[32m+[m	[32m@FXML[m[41m[m
+[32m+[m	[32mImageView userBg;[m[41m[m
+ [m
+[31m-	[m
+ 	@Override[m
+ 	public void initialize(URL location, ResourceBundle resources) {[m
+ 		Properties session = new Properties();[m
+[36m@@ -59,19 +53,21 @@[m [mpublic class SideMenuController implements Initializable {[m
+ 			is = null;[m
+ 		}[m
+ [m
+[31m-		String userPicturePath = session.getProperty("userPicture");[m
+[31m-//		System.out.println(userPicturePath);[m
+[31m-		File file = new File(userPicturePath);[m
+[31m-		file.getAbsolutePath();[m
+[31m-//		Image userPicture = new Image(getClass().getResourceAsStream(userPicturePath));[m
+[31m-//		userImageHolder.setImage(userPicture);  //TODO: find a way to load picture path from property file[m
+[31m-[m
+ 		userName.setText(session.getProperty("loggedUser"));[m
+ 		userName.setStyle("-fx-stroke: #000");[m
+ 		userName.setStyle("-fx-stroke-width: 2px");[m
+ 		[m
+[31m-	}[m
+[32m+[m		[32mString userPicturePath = session.getProperty("userPicture");[m[41m[m
+[32m+[m		[32mImage userPicture = ImageLoader.getInstance().loadImage(userPicturePath);[m[41m[m
+[32m+[m		[32muserImageHolder.setImage(userPicture);[m[41m[m
+[32m+[m		[32mSystem.out.println(userPicturePath);[m[41m[m
+[32m+[m[41m		[m
+[32m+[m[32m//		String userBgPath = session.getProperty("userBackground");[m[41m[m
+[32m+[m[41m		[m
+[32m+[m[32m//		Image userBgImage = ImageLoader.getInstance().loadImage(userBgPath);[m[41m[m
+[32m+[m[32m//		userBg.setImage(userBgImage);[m[41m[m
+ [m
+[32m+[m	[32m}[m[41m[m
+ [m
+ 	@FXML[m
+ 	public void openHome() throws IOException {[m
+[36m@@ -81,24 +77,27 @@[m [mpublic class SideMenuController implements Initializable {[m
+ 		sceneLoader.setContentLabel("");[m
+ 	}[m
+ [m
+[31m-	@FXML public void openClients() {[m
+[31m-		[m
+[32m+[m	[32m@FXML[m[41m[m
+[32m+[m	[32mpublic void openClients() {[m[41m[m
+[32m+[m[41m[m
+ 		SceneLoader sceneLoader = SceneLoader.getInstance();[m
+[31m-		[m
+[32m+[m[41m[m
+ 		sceneLoader.switchScene("Clients");[m
+ 		sceneLoader.setContentLabel("Клиенти");[m
+ 	}[m
+ [m
+[31m-	@FXML public void openCourses() {[m
+[32m+[m	[32m@FXML[m[41m[m
+[32m+[m	[32mpublic void openCourses() {[m[41m[m
+ 		SceneLoader sceneLoader = SceneLoader.getInstance();[m
+[31m-		[m
+[32m+[m[41m[m
+ 		sceneLoader.switchScene("Courses");[m
+ 		sceneLoader.setContentLabel("Курсове");[m
+ 	}[m
+[31m-	[m
+[31m-	@FXML public void openMentors() {[m
+[32m+[m[41m[m
+[32m+[m	[32m@FXML[m[41m[m
+[32m+[m	[32mpublic void openMentors() {[m[41m[m
+ 		SceneLoader sceneLoader = SceneLoader.getInstance();[m
+[31m-		[m
+[32m+[m[41m[m
+ 		sceneLoader.switchScene("Mentors");[m
+ 		sceneLoader.setContentLabel("Ментори");[m
+ 	}[m
+[36m@@ -107,7 +106,7 @@[m [mpublic class SideMenuController implements Initializable {[m
+ 	public void exitApplication() {[m
+ 		ButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);[m
+ 		ButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);[m
+[31m-		[m
+[32m+[m[41m[m
+ 		Alert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да излезете?", yes, no);[m
+ 		alert.setTitle("Изход");[m
+ 		alert.showAndWait();[m
+[36m@@ -117,5 +116,4 @@[m [mpublic class SideMenuController implements Initializable {[m
+ 		}[m
+ 	}[m
+ [m
+[31m-[m
+ }[m
+[1mdiff --git a/src/application/application.css b/src/application/application.css[m
+[1mindex 0a3425c..3131218 100644[m
+[1m--- a/src/application/application.css[m
+[1m+++ b/src/application/application.css[m
+[36m@@ -3,20 +3,20 @@[m
+ }[m
+ [m
+ .label-container {[m
+[31m-	-fx-background-color: linear-gradient(/* #FFB74D 0%,*/ #FFCC80 0%, #FFE0B2 50%, #FFF3E0 100%);[m
+[32m+[m	[32m-fx-background-color: linear-gradient(#FFCC80 0.0%, #FFE0B2 50.0%, #FFF3E0 100.0%);[m
+ }[m
+ [m
+ .content-label {[m
+[31m-	-fx-font-size: 20px;[m
+[32m+[m	[32m-fx-font-size: 20.0px;[m
+ 	-fx-font-weight: bold;[m
+ 	-fx-text-fill: #212121;[m
+ }[m
+ [m
+ .home {[m
+[31m-        -fx-background-image: url("../resources/logo-bg.png");[m
+[31m-        -fx-background-size: 360 227;[m
+[31m-        -fx-background-repeat:no-repeat;[m
+[31m-        -fx-background-position:center;[m
+[32m+[m	[32m-fx-background-image: url("../resources/logo-bg.png");[m
+[32m+[m	[32m-fx-background-size: 360.0 227.0;[m
+[32m+[m	[32m-fx-background-repeat:no-repeat;[m
+[32m+[m	[32m-fx-background-position:center;[m
+ }[m
+ [m
+ .side-menu {[m
+[36m@@ -31,20 +31,19 @@[m
+ 	-fx-underline: false;[m
+ }[m
+ .tab {    [m
+[31m-	-fx-padding: 10 20 10 20;[m
+[32m+[m	[32m-fx-padding: 10.0 20.0 10.0 20.0;[m
+ 	-fx-background-color: #FFE0B2;[m
+[31m-	-fx-tab-min-height: 35px;[m
+[31m-	-fx-tab-max-height: 45px;[m
+[31m-	-fx-font-size: 20px;[m
+[32m+[m	[32m-fx-tab-min-height: 35.0px;[m
+[32m+[m	[32m-fx-tab-max-height: 45.0px;[m
+[32m+[m	[32m-fx-font-size: 20.0px;[m
+ }[m
+ [m
+ .tab:selected {[m
+ 	-fx-border-style: none;[m
+     -fx-background-color: #FFB74D;[m
+ }[m
+[32m+[m
+ /*remove gray background on tabs */[m
+ .tab-pane .tab-header-area .tab-header-background {[m
+     -fx-background-color: transparent;[m
+[31m-    /*-fx-effect: null;[m
+[31m-    -fx-opacity: 0;*/[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/helpers/DateManager.java b/src/helpers/DateManager.java[m
+[1mindex a654ce5..2c7ec76 100644[m
+[1m--- a/src/helpers/DateManager.java[m
+[1m+++ b/src/helpers/DateManager.java[m
+[36m@@ -19,4 +19,5 @@[m [mpublic class DateManager {[m
+ 	    cal.setTime(date);[m
+ 	    return cal;[m
+ 	}[m
+[32m+[m[41m	[m
+ }[m
+[1mdiff --git a/src/resources/admin.png b/src/resources/admin.png[m
+[1mdeleted file mode 100644[m
+[1mindex 0da01d9..0000000[m
+Binary files a/src/resources/admin.png and /dev/null differ
+[1mdiff --git a/src/resources/default.png b/src/resources/default.png[m
+[1mdeleted file mode 100644[m
+[1mindex d7174d0..0000000[m
+Binary files a/src/resources/default.png and /dev/null differ
+[1mdiff --git a/src/resources/logo.png b/src/resources/logo.png[m
+[1mdeleted file mode 100644[m
+[1mindex 0c500f3..0000000[m
+Binary files a/src/resources/logo.png and /dev/null differ
+[1mdiff --git a/src/resources/user-bg.png b/src/resources/user-bg.png[m
+[1mdeleted file mode 100644[m
+[1mindex 4badb94..0000000[m
+Binary files a/src/resources/user-bg.png and /dev/null differ

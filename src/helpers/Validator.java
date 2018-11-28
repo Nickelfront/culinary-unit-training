@@ -29,9 +29,12 @@ public class Validator {
 	
 	public static boolean validateAge(LocalDate birthDateInput) {
 		Date birthDate = Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault())));
-		System.out.println(DateManager.getYearDifference(birthDate));
 		
 		return DateManager.getYearDifference(birthDate) > 16;
+	}
+	
+	public static boolean validateDates(LocalDate startDate, LocalDate endDate) {
+		return startDate.compareTo(endDate) < 1;
 	}
 
 	public static void setFieldInputAsInvalid(TextField textField) {
