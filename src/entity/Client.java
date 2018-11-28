@@ -47,6 +47,7 @@ public class Client {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public int getAge() {
 		return age;
 	}
@@ -54,4 +55,9 @@ public class Client {
 		this.age = age;
 	}
 	
+	@Override
+	public String toString() {
+		return "Client [clientId=" + clientId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+				+ ", email=" + email + ", phone=" + phone + "]";
+	}
 }

@@ -5,14 +5,11 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
-import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Hyperlink;
 
 public class AboutController implements Initializable {
 
@@ -22,10 +19,12 @@ public class AboutController implements Initializable {
 	JFXButton btnClose;
 	@FXML
 	Hyperlink linkIcon;
-	@FXML 
+	@FXML
 	Hyperlink freepikLink;
-	@FXML 
+	@FXML
 	Hyperlink flaticonLink;
+	@FXML
+	Hyperlink jfxLink;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -41,8 +40,14 @@ public class AboutController implements Initializable {
 	public void onClickFirstLink() {
 		new MainApp().getHostServices().showDocument("https://www.freepik.com/");
 	}
+
 	@FXML
 	public void onClickSecondLink() {
 		new MainApp().getHostServices().showDocument("https://www.flaticon.com/");
+	}
+
+	@FXML
+	public void onClickThirdLink() {
+		new MainApp().getHostServices().showDocument("http://www.jfoenix.com");
 	}
 }

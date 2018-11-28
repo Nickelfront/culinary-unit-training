@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -30,8 +32,60 @@
                               <TableColumn fx:id="emailColumn" minWidth="-1.0" prefWidth="166.0" resizable="false" text="E-Mail" />
                               <TableColumn fx:id="salaryColumn" minWidth="-1.0" prefWidth="104.0" resizable="false" text="Заплата" />
                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteMentor" text="Изтрий" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
                      </content>
+                  </Tab>
+                  <Tab text="Търсене">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="searchedMentorName" layoutX="22.0" layoutY="92.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="22.0" layoutY="59.0" text="По име" />
+                              <TextField fx:id="searchedMentorPhone" layoutX="22.0" layoutY="188.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="22.0" layoutY="156.0" text="По телефон" />
+                              <TextField fx:id="searchedMentorEmail" layoutX="22.0" layoutY="283.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="22.0" layoutY="252.0" text="По e-mail" />
+                              <Button fx:id="searchByNameBtn" layoutX="206.0" layoutY="136.0" mnemonicParsing="false" onAction="#searchByName" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <AnchorPane layoutX="451.0" layoutY="2.0" prefHeight="429.0" prefWidth="450.0" style="-fx-border-color: #eee;">
+                                 <children>
+                                    <Label fx:id="foundMentorName" layoutX="14.0" layoutY="59.0" text="Име и фамилия: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundMentorPhone" layoutX="14.0" layoutY="100.0" text="Телефон: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundMentorEmail" layoutX="14.0" layoutY="142.0" text="E-Mail: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="114.0" layoutY="14.0" text="Резултати от търсенето:">
+                                       <font>
+                                          <Font size="23.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="prevBtn" disable="true" layoutX="127.0" layoutY="386.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
+                                    <Button fx:id="nextBtn" disable="true" layoutX="257.0" layoutY="386.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
+                                    <Label fx:id="resultCount" layoutX="233.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label fx:id="currentResult" layoutX="191.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label layoutX="211.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="от" />
+                                 </children>
+                              </AnchorPane>
+                              <Button fx:id="searchByPhoneBtn" layoutX="206.0" layoutY="232.0" mnemonicParsing="false" onAction="#searchByPhone" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <Button fx:id="searchByEmailBtn" layoutX="206.0" layoutY="322.0" mnemonicParsing="false" onAction="#searchByEmail" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                           </children></AnchorPane>
+                    </content>
                   </Tab>
                 <Tab text="Нов ментор">
                      <content>
@@ -52,11 +106,6 @@
                            </children>
                         </Pane>
                      </content></Tab>
-                  <Tab text="Курсове">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
               </tabs>
                <HBox.margin>
                   <Insets />
