@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import com.jfoenix.controls.JFXTreeTableView;
 
-import entity.Client;
+import entity.Clients;
 import entity.Mentor;
 import helpers.TableFactory;
 import helpers.Validator;

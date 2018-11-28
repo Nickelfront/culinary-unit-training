@@ -20,7 +20,7 @@ public class MainApp extends Application {
         AnchorPane root;
 
         try {
-            BaseDBConnector dc = new BaseDBConnector();
+            BaseDBConnector dc = BaseDBConnector.getInstance();
 
             root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
             Scene scene = new Scene(root);
@@ -37,8 +37,6 @@ public class MainApp extends Application {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
