@@ -9,10 +9,15 @@ import DB.BaseDBConnector;
 import DB.BaseDBDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableArray;
 
 /**
  *
@@ -33,7 +38,7 @@ public abstract class Base {
     abstract protected void configure();
     
     public Base save(){
-        String query = "INSERT INTO " + tableName+ "( ";
+        String query = "INSERT INTO " + tableName+ " ( ";
         for (Map.Entry<String, String> entry : fields.entrySet()) {
            query += entry.getValue()+",";
         }
@@ -57,7 +62,7 @@ public abstract class Base {
             } catch (InvocationTargetException ex) {
                 Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
             }
-           query += value+",";
+           query += "'"+value+"',";
         }
         
         query = query.substring(0, query.length()-1) + ")";
@@ -70,5 +75,13 @@ public abstract class Base {
     private String getMethodName(String name){
         return "get"+ Character.toUpperCase(name.charAt(0))+name.substring(1);
     }
-    
+     private String getSetMethodName(String name){
+        return "set"+ Character.toUpperCase(name.charAt(0))+name.substring(1);
+    }
+    public List<Base> all(){
+        ResultSet res = dbDriver.getAllFrom(tableName);
+        List<Base> result= new ArrayList<Base>();
+        
+        return result;
+    }
 }

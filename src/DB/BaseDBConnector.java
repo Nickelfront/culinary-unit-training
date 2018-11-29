@@ -6,7 +6,9 @@
 package DB;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -57,19 +59,28 @@ public class BaseDBConnector implements BaseDBDriver {
     private void initialize() throws SQLException {
         Statement script = db.createStatement();
         script.execute("CREATE TABLE IF NOT EXISTS clients("
-                + "id int Primary Key,"
+                + "id integer,"
                 + "first_name varchar(255),"
                 + "last_name varchar(255),"
-                + "email varchar(255) unique,"
+                + "email varchar(255),"
                 + "phone varchar(32),"
-                + "birth_date text"
-                + ")");
-    //    CREATE TABLE IF NOT EXISTS [schema_name].table_name (
-//            column_1 data_type PRIMARY KEY,
-//            column_2 data_type NOT NULL,
-//            column_3 data_type DEFAULT 0,
-//            table_constraint
-//        )
+                + "birth_date text,"
+                + " primary key(id)"
+                + ");");
+  
+             System.out.println(tableExists("clients"));
+    }
+    public boolean tableExists(String tableName){
+        try{
+            DatabaseMetaData md = db.getMetaData();
+            ResultSet rs = md.getTables(null, null, tableName, null);
+            rs.next();
+            return rs.getRow() > 0;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+
+        }
+        return false;
     }
 
     @Override
@@ -82,5 +93,14 @@ public class BaseDBConnector implements BaseDBDriver {
         }
         return this;
     }
-
+    public ResultSet getAllFrom(String table) {
+        try {
+            Statement statement = db.createStatement();
+            return statement.executeQuery("SELECT * FROM "+ table);
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }
