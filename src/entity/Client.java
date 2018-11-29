@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Date;
 
-public class Clients extends Base {
+public class Client extends Base {
     static public String TB = "clients";
     
     private int clientId;
@@ -12,11 +12,11 @@ public class Clients extends Base {
     private String email;
     private String phone;
 
-    public Clients() {
+    public Client() {
         super();
     }
 
-    public Clients(int clientId, String firstName, String lastName, Date birthDate, String email, String phone) {
+    public Client(int clientId, String firstName, String lastName, Date birthDate, String email, String phone) {
         super();
 
         this.clientId = clientId;
@@ -64,8 +64,8 @@ public class Clients extends Base {
     }
 
     public String getBirthDate() {
-        return "2016-01-01";
-//		return birthDate;
+//        return "2016-01-01";
+	return birthDate.toString();
     }
 
     public void setBirthDate(Date age) {

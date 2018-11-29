@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXSlider?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -33,8 +36,75 @@
                               <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
                               <TableColumn fx:id="priceColumn" prefWidth="104.0" resizable="false" text="Цена" />
                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteCourse" text="Изтрий" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
                      </content>
+                  </Tab>
+                  <Tab text="Търсене">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="searchedCourseTitle" layoutX="52.0" layoutY="65.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="52.0" layoutY="38.0" text="По име на курса" />
+                              <Button fx:id="searchByTitleBtn" layoutX="236.0" layoutY="105.0" mnemonicParsing="false" onAction="#searchByTitle" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <Label layoutX="52.0" layoutY="134.0" text="По дата" />
+                              <Button fx:id="searchByPeriodBtn" layoutX="236.0" layoutY="207.0" mnemonicParsing="false" onAction="#searchByPeriod" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <Label layoutX="51.0" layoutY="247.0" text="По цена" />
+                              <Button fx:id="searchByPriceBtn" layoutX="236.0" layoutY="361.0" mnemonicParsing="false" onAction="#searchByPrice" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <JFXSlider fx:id="minSelectedPrice" layoutX="151.0" layoutY="281.0" majorTickUnit="100.0" max="500.0" minorTickCount="10" prefHeight="35.0" prefWidth="177.0" showTickLabels="true" />
+                              <Label layoutX="49.0" layoutY="281.0" text="Минимална:" />
+                              <JFXSlider fx:id="maxSelectedPrice" layoutX="151.0" layoutY="316.0" majorTickUnit="100.0" max="500.0" minorTickCount="10" prefHeight="35.0" prefWidth="177.0" showTickLabels="true" />
+                              <Label layoutX="49.0" layoutY="316.0" text="Максимална:" />
+                              <DatePicker fx:id="fromDate" layoutX="52.0" layoutY="162.0" prefHeight="30.0" prefWidth="125.0" promptText="от..." />
+                              <DatePicker fx:id="toDate" layoutX="200.0" layoutY="163.0" prefHeight="29.0" prefWidth="125.0" promptText="до..." />
+                              <AnchorPane layoutX="438.0" layoutY="2.0" prefHeight="429.0" prefWidth="450.0" style="-fx-border-color: #eee;">
+                                 <children>
+                                    <Label fx:id="foundCourseTitle" layoutX="14.0" layoutY="59.0" text="Име на курса: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundCourseStartDate" layoutX="14.0" layoutY="100.0" text="Начална дата: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundCourseEndDate" layoutX="14.0" layoutY="142.0" text="Крайна дата: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="114.0" layoutY="14.0" text="Резултати от търсенето:">
+                                       <font>
+                                          <Font size="23.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="prevBtn" disable="true" layoutX="127.0" layoutY="386.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
+                                    <Button fx:id="nextBtn" disable="true" layoutX="257.0" layoutY="386.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
+                                    <Label fx:id="resultCount" layoutX="233.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label fx:id="currentResult" layoutX="191.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label layoutX="211.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="от" />
+                                    <Label fx:id="foundCoursePrice" layoutX="14.0" layoutY="221.0" text="Цена: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundCourseMaxSpots" layoutX="14.0" layoutY="183.0" text="Максимален брой места: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
                   </Tab>
                 <Tab text="Нов курс">
                      <content>

@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -22,7 +24,7 @@
               <tabs>
                 <Tab text="Преглед">
                      <content>
-                        <TableView fx:id="clientsTable" minWidth="400.0" prefHeight="379.0" prefWidth="1078.0" snapToPixel="false" styleClass="table">
+                        <TableView fx:id="clientsTable" minWidth="400.0" prefHeight="379.0" prefWidth="608.0" snapToPixel="false" styleClass="table">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="69.0" resizable="false" styleClass=".column-header" text="ID" />
                             <TableColumn fx:id="firstNameColumn" minWidth="-1.0" prefWidth="133.0" resizable="false" styleClass=".column-header" text="Име" />
@@ -31,8 +33,63 @@
                               <TableColumn fx:id="phoneColumn" minWidth="-1.0" prefWidth="138.0" resizable="false" styleClass=".column-header" text="Телефон" />
                               <TableColumn fx:id="emailColumn" maxWidth="290.0" minWidth="-1.0" prefWidth="228.0" resizable="false" styleClass=".column-header" text="E-Mail" />
                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteClient" text="Изтрий" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </content>
+                  </Tab>
+                  <Tab text="Търсене">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="searchedClientName" layoutX="75.0" layoutY="66.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="75.0" layoutY="40.0" text="По име" />
+                              <TextField fx:id="searchedClientPhone" layoutX="75.0" layoutY="160.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="75.0" layoutY="132.0" text="По телефон" />
+                              <TextField fx:id="searchedClientEmail" layoutX="75.0" layoutY="256.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="75.0" layoutY="227.0" text="По e-mail" />
+                              <Button fx:id="searchByNameBtn" layoutX="259.0" layoutY="103.0" mnemonicParsing="false" onAction="#searchByName" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <AnchorPane layoutX="423.0" layoutY="2.0" prefHeight="429.0" prefWidth="450.0" style="-fx-border-color: #eee;">
+                                 <children>
+                                    <Label fx:id="foundClientName" layoutX="14.0" layoutY="59.0" text="Име и фамилия: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundClientPhone" layoutX="14.0" layoutY="100.0" text="Телефон: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foundClientEmail" layoutX="14.0" layoutY="142.0" text="E-Mail: ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="114.0" layoutY="14.0" text="Резултати от търсенето:">
+                                       <font>
+                                          <Font size="23.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="prevBtn" disable="true" layoutX="127.0" layoutY="386.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
+                                    <Button fx:id="nextBtn" disable="true" layoutX="257.0" layoutY="386.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
+                                    <Label fx:id="resultCount" layoutX="233.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label fx:id="currentResult" layoutX="191.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label layoutX="211.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="от" />
+                                 </children>
+                              </AnchorPane>
+                              <Button fx:id="searchByPhoneBtn" layoutX="259.0" layoutY="198.0" mnemonicParsing="false" onAction="#searchByPhone" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                              <Button fx:id="searchByEmailBtn" layoutX="259.0" layoutY="292.0" mnemonicParsing="false" onAction="#searchByEmail" prefHeight="29.0" prefWidth="89.0" text="Търси" />
+                           </children></AnchorPane>
+                    </content>
                   </Tab>
                 <Tab text="Нов клиент">
                      <content>
@@ -53,11 +110,6 @@
                            </children>
                         </Pane>
                      </content></Tab>
-                  <Tab text="Курсове">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
               </tabs>
                <HBox.margin>
                   <Insets />

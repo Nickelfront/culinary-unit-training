@@ -1,23 +1,17 @@
 package application;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.Properties;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class LoginFormController{
@@ -54,7 +48,9 @@ public class LoginFormController{
 		    //write a properties file with user information that will be shown in the app
 		    Properties session = new Properties();
 		    session.put("loggedUser", username);
-		    session.put("userPicture", username + ".png");
+		    session.put("userPicture", username + "-icon.png");
+//		    session.put("userBackground", username + "-bg.png");
+		    
 		    File file = new File("session.properties");
 		    try {
 		    	OutputStream out = new FileOutputStream(file);
