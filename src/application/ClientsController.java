@@ -1,5 +1,6 @@
 package application;
 
+import entity.Base;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -114,7 +115,12 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
-
+        List<Base> allClients = new Client().all();
+        
+        for (Base cl : allClients) {
+            clientsTable.getItems().add((Client) cl);
+        }
+        
         clientsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -154,7 +160,7 @@ public class ClientsController implements Initializable {
 
         Client client = new Client(incrementID(), firstName.getText(), lastName.getText(), getClientAge(birthDateInput),
                 email.getText(), phone.getText());
-
+        client.save();
         clientsTable.getItems().add(client);
 
         handleClearForm();
@@ -169,8 +175,8 @@ public class ClientsController implements Initializable {
         phone.setText(""); // TODO: if border has become red from previous validation attempt, reset it.
     }
 
-    private Date getClientAge(LocalDate birthDateInput) {
-         return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault())));
+    private String getClientAge(LocalDate birthDateInput) {
+         return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))).toString();
     }
 
     private int incrementID() {
