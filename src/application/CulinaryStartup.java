@@ -1,5 +1,6 @@
 package application;
 
+
 import helpers.ImageLoader;
 import helpers.StyleSheetLoader;
 import javafx.application.Application;

@@ -1,6 +1,10 @@
 package application;
 
+import DB.BaseDBConnector;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import helpers.ImageLoader;
 import helpers.StyleSheetLoader;
@@ -17,41 +21,42 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-	@Override
-	public void start(Stage stage) {
-		AnchorPane root;
-		
-		try {
-			root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
-			Scene scene = new Scene(root);
-			
-			StyleSheetLoader styleSheetLoader = new StyleSheetLoader();
-			styleSheetLoader.setContext(scene);
-			styleSheetLoader.loadStyleSheet("application");
-			
-			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
-			stage.getIcons().add(icon);
-			stage.setResizable(false);
-			stage.setScene(scene);
-			stage.setTitle("UberChef - организатор");
-			stage.show();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		stage.setOnCloseRequest( event -> {
-			ButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);
-			ButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
-			
-			Alert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да излезете?", yes, no);
-			alert.setTitle("Изход");
-			alert.showAndWait();
-			if (alert.getResult().equals(yes)) {
-				stage.close();
-			} else {
-				event.consume();
-			}
-		});
-	}
+    @Override
+    public void start(Stage stage) {
+        AnchorPane root;
+
+        try {
+            BaseDBConnector dc = BaseDBConnector.getInstance();
+            root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
+            Scene scene = new Scene(root);
+
+            StyleSheetLoader styleSheetLoader = new StyleSheetLoader();
+            styleSheetLoader.setContext(scene);
+            styleSheetLoader.loadStyleSheet("application");
+
+            Image icon = ImageLoader.getInstance().loadImage("cooking.png");
+            stage.getIcons().add(icon);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("UberChef - организатор");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setOnCloseRequest(event -> {
+            ButtonType yes = new ButtonType("Изход", ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Сигурни ли сте, че искате да излезете?", yes, no);
+            alert.setTitle("Изход");
+            alert.showAndWait();
+            if (alert.getResult().equals(yes)) {
+                stage.close();
+            } else {
+                event.consume();
+            }
+        });
+    }
 }
