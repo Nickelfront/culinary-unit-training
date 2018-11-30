@@ -1,0 +1,27 @@
+.anchor-pane, .toolbar {
+	-fx-background-color:  #EFEBE9;
+}
+
+.label-container {
+	-fx-background-color: linear-gradient(#BCAAA4 0.0%, #D7CCC8 50.0%, #EFEBE9 100.0%);
+}
+
+.side-menu {
+	-fx-background-color: #3E2723;
+}
+
+.tab {    
+	-fx-background-color: #D7CCC8;
+}
+
+.tab:selected {
+    -fx-background-color: #A1887F;
+}
+
+.jfx-slider .colored-track,  .thumb, .animated-thumb {
+	-fx-background-color: #4E342E;
+}
+
+.jfx-button .about-close {
+	-fx-background-color:  #8D6E63;
+}

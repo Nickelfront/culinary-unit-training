@@ -41,7 +41,6 @@ public class MainAppController implements Initializable {
 			e.printStackTrace();
 		}
 		
-		
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 		sceneLoader.setContext(appContainer, contentLabel);
 		sceneLoader.switchScene("Home");

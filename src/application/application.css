@@ -1,10 +1,11 @@
-.anchor-pane, .toolbar {
+/* .anchor-pane, .toolbar {
 	-fx-background-color:  #FFF3E0;
 }
 
 .label-container {
 	-fx-background-color: linear-gradient(#FFCC80 0.0%, #FFE0B2 50.0%, #FFF3E0 100.0%);
 }
+*/
 
 .content-label {
 	-fx-font-size: 20.0px;
@@ -19,9 +20,12 @@
 	-fx-background-position:center;
 }
 
-.side-menu {
-	-fx-background-color: #E65100;
+.content-label {
+	-fx-text-fill: #212121;
 }
+/* .side-menu {
+	-fx-background-color: #E65100;
+}*/
 
 .about-link {
 	-fx-border-style: none;
@@ -32,7 +36,7 @@
 }
 .tab {    
 	-fx-padding: 10.0 20.0 10.0 20.0;
-	-fx-background-color: #FFE0B2;
+/* 	-fx-background-color: #FFE0B2; */
 	-fx-tab-min-height: 35.0px;
 	-fx-tab-max-height: 45.0px;
 	-fx-font-size: 20.0px;
@@ -40,18 +44,18 @@
 
 .tab:selected {
 	-fx-border-style: none;
-    -fx-background-color: #FFB74D;
+/*     -fx-background-color: #FFB74D; */
 }
 
 /*remove gray background on tabs */
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
 }
-
+/* 
 .jfx-slider .colored-track,  .thumb, .animated-thumb {
 	-fx-background-color: #ee6002;
-}
+} 
 
 .jfx-button.about-close {
 	-fx-background-color:  #FB8C00;
-}
+}*/
