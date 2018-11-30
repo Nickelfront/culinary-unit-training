@@ -1,15 +1,5 @@
 package entity;
 
-import java.lang.reflect.Method;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Client extends Base {
     static public String TB = "clients";
     
@@ -88,7 +78,8 @@ public class Client extends Base {
     protected void configure() {
         tableName = TB;
 
-        fields.put("clientId", "Int:id");
+        
+        fields.put("clientId", "Int:id:deletable");
         fields.put("firstName", "String:first_name");
         fields.put("lastName", "String:last_name");
         fields.put("email", "String:email");

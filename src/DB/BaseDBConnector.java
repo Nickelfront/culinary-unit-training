@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,7 +85,7 @@ public class BaseDBConnector implements BaseDBDriver {
     }
 
     @Override
-    public BaseDBDriver save(String query) {
+    public BaseDBDriver execute(String query) {
         try {
             Statement statement = db.createStatement();
             statement.execute(query);
@@ -106,5 +107,4 @@ public class BaseDBConnector implements BaseDBDriver {
         
         return null;
     }
-    
 }

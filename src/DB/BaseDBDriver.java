@@ -12,8 +12,7 @@ import java.sql.ResultSet;
  * @author bozhidar
  */
 public interface BaseDBDriver {
-    BaseDBDriver save(String query);
+    BaseDBDriver execute(String query);
     ResultSet getAllFrom(String tableName);
-    //BaseDBDriver update();
     //BaseDBDriver find();
 }

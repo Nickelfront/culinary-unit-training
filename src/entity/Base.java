@@ -15,10 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableArray;
 
 /**
  *
@@ -29,7 +27,8 @@ public abstract class Base {
     protected BaseDBDriver dbDriver;
 
     protected String tableName;
-
+    ArrayList<String> deletableBy;
+    
     protected Map<String, String> fields = new HashMap<>();
 
     Base() {
@@ -38,9 +37,40 @@ public abstract class Base {
     }
 
     abstract protected void configure();
-
+    
+    public Base delete(){
+        Class model = this.getClass();
+        String deleteQuery = "DELETE FROM " + tableName + " WHERE ";
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
+            String[] splitedDBFieldName = entry.getValue().split(":");
+            if (splitedDBFieldName.length >= 3 && splitedDBFieldName[2].equals("deletable")) {
+                try {
+                    Method getter = model.getMethod(getMethodName(entry.getKey()));
+                    deleteQuery += " "+splitedDBFieldName[1]+"='"+getter.invoke(this)+"' AND";
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        deleteQuery = deleteQuery.substring(0, deleteQuery.length()-3);
+        
+        dbDriver.execute(deleteQuery);
+        
+        return this;
+    }
+    
     public Base save() {
+        
         String query = "INSERT INTO " + tableName + " ( ";
+        
         for (Map.Entry<String, String> entry : fields.entrySet()) {
             String field = entry.getValue().split(":")[1];
             query += field + ",";
@@ -70,7 +100,7 @@ public abstract class Base {
 
         query = query.substring(0, query.length() - 1) + ")";
 
-        dbDriver.save(query);
+        dbDriver.execute(query);
 
         return this;
     }
@@ -95,6 +125,7 @@ public abstract class Base {
             Class cls = Class.forName(className);
             Base classInstance;
             Method[] arrayOfModelMethods = this.getClass().getMethods();
+            
             while (res.next()) {
                 classInstance = (Base) cls.newInstance();
                 for (Map.Entry<String, String> entry : fields.entrySet()) {

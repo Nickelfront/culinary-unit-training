@@ -72,7 +72,6 @@ public class ClientsController implements Initializable {
     @FXML
     TextField searchedClientEmail;
 
-    @FXML
     Button searchBtn;
 
     @FXML
@@ -202,6 +201,7 @@ public class ClientsController implements Initializable {
         al.showAndWait();
         if (al.getResult().equals(delete)) {
             clientsTable.getItems().remove(selectedClient);
+            selectedClient.delete();
         }
     }
 
