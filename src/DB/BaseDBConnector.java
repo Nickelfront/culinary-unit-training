@@ -93,6 +93,9 @@ public class BaseDBConnector implements BaseDBDriver {
         }
         return this;
     }
+    
+    
+    @Override
     public ResultSet getAllFrom(String table) {
         try {
             Statement statement = db.createStatement();
@@ -100,6 +103,7 @@ public class BaseDBConnector implements BaseDBDriver {
         } catch (SQLException ex) {
             Logger.getLogger(BaseDBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return null;
     }
     
