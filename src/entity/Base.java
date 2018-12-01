@@ -27,9 +27,10 @@ public abstract class Base {
     protected BaseDBDriver dbDriver;
 
     protected String tableName;
-    ArrayList<String> deletableBy;
+
     
     protected Map<String, String> fields = new HashMap<>();
+    protected Map<String, String> relationships = new HashMap<>();
 
     Base() {
         dbDriver = BaseDBConnector.getInstance();
@@ -106,7 +107,14 @@ public abstract class Base {
     }
 
     protected String getMethodName(String name) {
-        return "get" + Character.toUpperCase(name.charAt(0)) + name.substring(1);
+        String[] nameSegments = name.split("_");
+        String result = "get";
+        
+        for (int i = 0; i < nameSegments.length; i++) {
+            result += Character.toUpperCase(nameSegments[i].charAt(0)) + nameSegments[i].substring(1);
+        }
+        
+        return result;
     }
 
     protected String getSetMethodName(String name) {
@@ -170,5 +178,28 @@ public abstract class Base {
         }
         
         return result;
+    }
+    
+    /**
+     * 
+     * @param relationship
+     * @param id
+     * @throws Exception 
+     */
+    public void attach(String relationship, int id) throws Exception{
+        String relation = this.relationships.get(relationship);
+        
+        if (relation == null) {
+            throw new Exception("Relationsipt is not speciefied");
+        }
+        String[] relationOptions = relation.split(":");
+        
+        Method idGetter = this.getClass().getMethod(getMethodName(relationOptions[0]));
+        
+        String relationCreator = "INSERT INTO " + relationOptions[2] + "("
+                +relationOptions[0]+","+relationOptions[1]+") VALUES ( "
+                + "'"+idGetter.invoke(this)+"','"+id+"');";
+        
+        dbDriver.execute(relationCreator);
     }
 }

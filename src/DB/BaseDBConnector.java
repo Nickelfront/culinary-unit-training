@@ -88,6 +88,12 @@ public class BaseDBConnector implements BaseDBDriver {
                 + "salary decimal(10,2),"
                 + "primary key(id)"
                 + ");");
+        
+        script.execute("CREATE TABLE IF NOT EXISTS client_course("
+                + "client_id integer NOT NULL ,"
+                + "course_id integer NOT NULL ,"
+                + "FOREIGN KEY (client_id) REFERENCES clients(id),"
+                + "FOREIGN KEY (course_id) REFERENCES courses(id));");
   
 //             System.out.println(tableExists("clients"));
     }

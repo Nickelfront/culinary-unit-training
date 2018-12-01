@@ -15,11 +15,17 @@ import helpers.DateManager;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -32,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class ClientsController implements Initializable {
 
@@ -114,9 +121,9 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
-        
+
         TableFactory.fill(clientsTable, new Client().all());
-        
+
         clientsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -172,7 +179,7 @@ public class ClientsController implements Initializable {
     }
 
     private String getClientAge(LocalDate birthDateInput) {
-         return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))).toString();
+        return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))).toString();
     }
 
     private int incrementID() {
@@ -357,5 +364,25 @@ public class ClientsController implements Initializable {
         foundClientName.setText("Име и фамилия:");
         foundClientPhone.setText("Телефон:");
         foundClientEmail.setText("Email:");
+    }
+
+    @FXML
+    private void handleRegisterToCourse(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AssigneClientToCourse.fxml"));
+            AssigneClientToCourseController controller = new AssigneClientToCourseController((Client) clientsTable.getSelectionModel().getSelectedItem());
+            loader.setController(controller);
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Записване за курс");
+            stage.setResizable(false);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClientsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -112,7 +112,12 @@ public class Course extends Base {
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
-
+    
+    @Override
+    public String toString(){
+        return this.getTitle();
+    }
+    
     @Override
     protected void configure() {
 
@@ -125,5 +130,6 @@ public class Course extends Base {
         fields.put("availableSpots", "Int:available_spots");
         fields.put("price", "Double:price");
         fields.put("description", "String:description");
+      
     }
 }

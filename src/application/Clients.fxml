@@ -36,6 +36,7 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleRegisterToCourse" text="Запиши за курс" />
                                   <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteClient" text="Изтрий" />
                                 </items>
                               </ContextMenu>

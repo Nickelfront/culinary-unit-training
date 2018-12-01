@@ -188,11 +188,13 @@ public class CoursesController implements Initializable {
 
     private int incrementID() {
         int lastItemID = 0;
+        
         if (!coursesTable.getItems().isEmpty()) {
             int lastItemIndex = coursesTable.getItems().size() - 1;
             lastItemID = coursesTable.getItems().get(lastItemIndex).getCourseId();
         }
-        return lastItemID++;
+        
+        return ++lastItemID;
     }
 
     @FXML
