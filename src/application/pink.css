@@ -10,6 +10,10 @@
 	-fx-background-color: #880E4F;
 }
 
+.line {
+	-fx-stroke: #C2185B;
+}
+
 .tab {    
 	-fx-background-color: #F8BBD0;
 }

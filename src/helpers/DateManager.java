@@ -28,4 +28,13 @@ public class DateManager {
 		return dateString;
 	}
 
+	public static String toReadableTime(Date date) {
+		DateFormat dfFull = new SimpleDateFormat("hh:mm");
+		String timeString = dfFull.format(date);
+		return timeString;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(toReadableTime(new Date()));
+	}
 }
