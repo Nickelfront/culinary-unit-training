@@ -1,7 +1,8 @@
 package entity;
 
-public class Mentor {
-
+public class Mentor extends Base{
+        static private String TB = "mentors";
+    
 	private int mentorId;
 	private String firstName;
 	private String lastName;
@@ -59,9 +60,25 @@ public class Mentor {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-
+        
+        public void setMentorId(int id) {
+		mentorId = id;
+	}
+        
 	public int getMentorId() {
 		return mentorId;
 	}
+
+    @Override
+    protected void configure() {
+        tableName = TB;
+        
+        fields.put("mentorId", "Int:id:deletable");
+        fields.put("firstName", "String:first_name");
+        fields.put("lastName", "String:last_name");
+        fields.put("email", "String:email");
+        fields.put("phone", "String:phone");
+        fields.put("salary", "Double:salary");
+    }
 	
 }

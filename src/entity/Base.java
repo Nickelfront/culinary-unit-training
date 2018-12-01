@@ -115,6 +115,7 @@ public abstract class Base {
 
     public List<Base> all() {
         ResultSet res = dbDriver.getAllFrom(tableName);
+        
         List<Base> result= new ArrayList<Base>();
         // Instantiated object class name
         String className = this.getClass().getName();
