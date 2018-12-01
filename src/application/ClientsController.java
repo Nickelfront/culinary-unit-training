@@ -114,11 +114,8 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
-        List<Base> allClients = new Client().all();
         
-        for (Base cl : allClients) {
-            clientsTable.getItems().add((Client) cl);
-        }
+        TableFactory.fill(clientsTable, new Client().all());
         
         clientsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
