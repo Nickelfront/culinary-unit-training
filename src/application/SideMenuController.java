@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 
 import helpers.ImageLoader;
 import helpers.Session;
+import helpers.ThemeLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,7 +47,7 @@ public class SideMenuController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Session session = new Session();
-
+		
 		userName.setText(session.get("loggedUser"));
 		userName.setStyle("-fx-stroke: #000");
 		userName.setStyle("-fx-stroke-width: 2px");
@@ -54,8 +55,12 @@ public class SideMenuController implements Initializable {
 		String userPicturePath = session.get("userPicture");
 		Image userPicture = ImageLoader.getInstance().loadImage(userPicturePath);
 		userImageHolder.setImage(userPicture);
-		System.out.println(userPicturePath);
 
+		ThemeLoader themeLoader = new ThemeLoader();
+		String userBgPath = "default-bg-" + themeLoader.get("current") + ".png";
+		Image userBgPicture = ImageLoader.getInstance().loadImage(userBgPath);
+		userBg.setImage(userBgPicture);
+		
 	}
 
 	@FXML

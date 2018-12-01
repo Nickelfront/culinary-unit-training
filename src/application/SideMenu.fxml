@@ -49,13 +49,13 @@
                <children>
                   <ImageView fx:id="userBg" fitHeight="99.0" fitWidth="160.0" opacity="0.8" pickOnBounds="true">
                      <image>
-                        <Image url="@../resources/Orange-default-bg.png" />
+                        <Image url="@../resources/default-bg-orange.png" />
                      </image>
                      <viewport>
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <Line endX="106.0" fill="WHITE" layoutX="53.0" layoutY="100.0" startX="-57.0" stroke="#f57c00" />
+                  <Line endX="106.0" fill="WHITE" layoutX="53.0" layoutY="100.0" startX="-57.0" stroke="#9e9790" styleClass="line" />
                   <ImageView fx:id="userImageHolder" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="21.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <viewport>
                         <Rectangle2D />
