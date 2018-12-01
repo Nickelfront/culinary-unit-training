@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,8 +67,29 @@ public class BaseDBConnector implements BaseDBDriver {
                 + "birth_date text,"
                 + " primary key(id)"
                 + ");");
+
+        script.execute("CREATE TABLE IF NOT EXISTS courses("
+                + "id integer,"
+                + "title varchar(255),"
+                + "start_date text,"
+                + "end_date text,"
+                + "available_spots integer,"
+                + "price decimal(10,2),"
+                + "description text,"
+                + "primary key(id)"
+                + ");");
+        
+        script.execute("CREATE TABLE IF NOT EXISTS mentors("
+                + "id integer,"
+                + "first_name varchar(255),"
+                + "last_name varchar(255),"
+                + "email varchar(255),"
+                + "phone varchar(32),"
+                + "salary decimal(10,2),"
+                + "primary key(id)"
+                + ");");
   
-             System.out.println(tableExists("clients"));
+//             System.out.println(tableExists("clients"));
     }
     public boolean tableExists(String tableName){
         try{

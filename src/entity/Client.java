@@ -1,7 +1,7 @@
 package entity;
 
 public class Client extends Base {
-    static public String TB = "clients";
+    static private String TB = "clients";
     
     private int clientId;
     private String firstName;
@@ -66,8 +66,7 @@ public class Client extends Base {
     }
 
     public String getBirthDate() {
-//        return "2016-01-01";
-	return birthDate.toString();
+	return birthDate;
     }
 
     public void setBirthDate(String birthDate) {
@@ -77,7 +76,6 @@ public class Client extends Base {
     @Override
     protected void configure() {
         tableName = TB;
-
         
         fields.put("clientId", "Int:id:deletable");
         fields.put("firstName", "String:first_name");
