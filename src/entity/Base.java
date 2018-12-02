@@ -28,7 +28,6 @@ public abstract class Base {
 
     protected String tableName;
 
-    
     protected Map<String, String> fields = new HashMap<>();
     protected Map<String, String> relationships = new HashMap<>();
 
@@ -38,8 +37,8 @@ public abstract class Base {
     }
 
     abstract protected void configure();
-    
-    public Base delete(){
+
+    public Base delete() {
         Class model = this.getClass();
         String deleteQuery = "DELETE FROM " + tableName + " WHERE ";
         for (Map.Entry<String, String> entry : fields.entrySet()) {
@@ -47,7 +46,7 @@ public abstract class Base {
             if (splitedDBFieldName.length >= 3 && splitedDBFieldName[2].equals("deletable")) {
                 try {
                     Method getter = model.getMethod(getMethodName(entry.getKey()));
-                    deleteQuery += " "+splitedDBFieldName[1]+"='"+getter.invoke(this)+"' AND";
+                    deleteQuery += " " + splitedDBFieldName[1] + "='" + getter.invoke(this) + "' AND";
                 } catch (NoSuchMethodException ex) {
                     Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SecurityException ex) {
@@ -61,17 +60,17 @@ public abstract class Base {
                 }
             }
         }
-        deleteQuery = deleteQuery.substring(0, deleteQuery.length()-3);
-        
+        deleteQuery = deleteQuery.substring(0, deleteQuery.length() - 3);
+
         dbDriver.execute(deleteQuery);
-        
+
         return this;
     }
-    
+
     public Base save() {
-        
+
         String query = "INSERT INTO " + tableName + " ( ";
-        
+
         for (Map.Entry<String, String> entry : fields.entrySet()) {
             String field = entry.getValue().split(":")[1];
             query += field + ",";
@@ -109,11 +108,11 @@ public abstract class Base {
     protected String getMethodName(String name) {
         String[] nameSegments = name.split("_");
         String result = "get";
-        
+
         for (int i = 0; i < nameSegments.length; i++) {
             result += Character.toUpperCase(nameSegments[i].charAt(0)) + nameSegments[i].substring(1);
         }
-        
+
         return result;
     }
 
@@ -122,22 +121,24 @@ public abstract class Base {
     }
 
     public List<Base> all() {
-        ResultSet res = dbDriver.getAllFrom(tableName);
-        
-        List<Base> result= new ArrayList<Base>();
+        return this.buildResponse(dbDriver.getAllFrom(tableName), this);
+    }
+
+    public List<Base> buildResponse(ResultSet res, Base instance) {
+        List<Base> result = new ArrayList<Base>();
         // Instantiated object class name
-        String className = this.getClass().getName();
-        
+        String className = instance.getClass().getName();
+
         Class responseClass = res.getClass();
 
         try {
             Class cls = Class.forName(className);
             Base classInstance;
-            Method[] arrayOfModelMethods = this.getClass().getMethods();
-            
+            Method[] arrayOfModelMethods = instance.getClass().getMethods();
+
             while (res.next()) {
                 classInstance = (Base) cls.newInstance();
-                for (Map.Entry<String, String> entry : fields.entrySet()) {
+                for (Map.Entry<String, String> entry : instance.fields.entrySet()) {
                     String setterMethod = getSetMethodName(entry.getKey());
                     String[] field = entry.getValue().split(":");
                     String getDBResMethod = getMethodName(field[0]);
@@ -149,16 +150,16 @@ public abstract class Base {
                             break;
                         }
                     }
-                    
+
                     Method responseClassMethod = responseClass.getMethod(getDBResMethod, String.class);
                     if (modelClassMethod != null) {
-                         modelClassMethod.invoke(classInstance,responseClassMethod.invoke(res, dbFieldName));
+                        modelClassMethod.invoke(classInstance, responseClassMethod.invoke(res, dbFieldName));
                     }
                 }
-                
-                result.add(classInstance);  
+
+                result.add(classInstance);
             }
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -176,30 +177,54 @@ public abstract class Base {
         } catch (InvocationTargetException ex) {
             Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return result;
     }
-    
+
     /**
-     * 
+     *
      * @param relationship
      * @param id
-     * @throws Exception 
+     * @throws Exception
      */
-    public void attach(String relationship, int id) throws Exception{
+    public void attach(String relationship, int id) throws Exception {
         String relation = this.relationships.get(relationship);
-        
+
         if (relation == null) {
             throw new Exception("Relationsipt is not speciefied");
         }
         String[] relationOptions = relation.split(":");
-        
+
         Method idGetter = this.getClass().getMethod(getMethodName(relationOptions[0]));
-        
+
         String relationCreator = "INSERT INTO " + relationOptions[2] + "("
-                +relationOptions[0]+","+relationOptions[1]+") VALUES ( "
-                + "'"+idGetter.invoke(this)+"','"+id+"');";
-        
+                + relationOptions[0] + "," + relationOptions[1] + ") VALUES ( "
+                + "'" + idGetter.invoke(this) + "','" + id + "');";
+
         dbDriver.execute(relationCreator);
+    }
+
+    public List<Base> belongsToMany(String relationship, Base relClass, String customIdentifier) throws Exception {
+        
+        String relation = this.relationships.get(relationship);
+
+        if (relation == null) {
+            throw new Exception("Relationsipt is not speciefied");
+        }
+
+        String[] relationOptions = relation.split(":");
+
+        Method idGetter = this.getClass().getMethod(getMethodName(relationOptions[0]));
+
+        String query = "SELECT * FROM " + relationOptions[2]
+                + " INNER JOIN " + relClass.tableName
+                + " ON " + relationOptions[2] + "." + relationOptions[1] + "=" + relClass.tableName + "."+customIdentifier
+                + " WHERE "+relationOptions[0]+"="+idGetter.invoke(this);
+
+        return this.buildResponse(dbDriver.executeQuery(query), relClass);
+    }
+    
+    public List<Base> belongsToMany(String relationship, Base relClass) throws Exception {
+        return this.belongsToMany(relationship, relClass, "id");
     }
 }

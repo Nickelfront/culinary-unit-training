@@ -133,4 +133,16 @@ public class BaseDBConnector implements BaseDBDriver {
         
         return null;
     }
+    
+    @Override
+    public ResultSet executeQuery(String query) {
+        try {
+            Statement statement = db.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 }

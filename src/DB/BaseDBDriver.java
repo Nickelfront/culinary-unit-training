@@ -14,5 +14,5 @@ import java.sql.ResultSet;
 public interface BaseDBDriver {
     BaseDBDriver execute(String query);
     ResultSet getAllFrom(String tableName);
-    //BaseDBDriver find();
+    ResultSet executeQuery(String query);
 }

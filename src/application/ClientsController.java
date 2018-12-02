@@ -1,6 +1,5 @@
 package application;
 
-import entity.Base;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import entity.Client;
-import helpers.DateManager;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
@@ -373,7 +371,7 @@ public class ClientsController implements Initializable {
             AssigneClientToCourseController controller = new AssigneClientToCourseController((Client) clientsTable.getSelectionModel().getSelectedItem());
             loader.setController(controller);
             Parent root = loader.load();
-            
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Записване за курс");
@@ -383,6 +381,27 @@ public class ClientsController implements Initializable {
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ClientsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void openInquiryView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignedCourses.fxml"));
+            AssignedCoursesController controller = new AssignedCoursesController((Client) clientsTable.getSelectionModel().getSelectedItem());
+            loader.setController(controller);
+            
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Справка за Клиент");
+            stage.setResizable(false);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (Exception e) {
+            System.err.print(e);
         }
     }
 }

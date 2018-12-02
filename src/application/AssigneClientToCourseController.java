@@ -31,32 +31,41 @@ public class AssigneClientToCourseController implements Initializable {
     private Label username;
     @FXML
     private ComboBox<Course> coursesComboBox;
+    @FXML
+    private Label price;
 
     public AssigneClientToCourseController(Client cl) {
         client = cl;
     }
-    
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        username.setText(client.getFirstName()+" "+client.getLastName());
+        username.setText(client.getFirstName() + " " + client.getLastName());
         TableFactory.fillComboBox(coursesComboBox, new Course().all());
-    }    
+        price.setText("");
+    }
 
     @FXML
     private void registerClient(ActionEvent event) {
         try {
             client.attach("course",
                     coursesComboBox.getSelectionModel().getSelectedItem().getCourseId());
-            Stage currentStage = (Stage)coursesComboBox.getScene().getWindow();
+            Stage currentStage = (Stage) coursesComboBox.getScene().getWindow();
             currentStage.close();
         } catch (Exception ex) {
             Logger.getLogger(AssigneClientToCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
+
+    @FXML
+    private void changedCourse(ActionEvent event) {
+        Course selectedCourse = coursesComboBox.getSelectionModel().getSelectedItem();
+        if (selectedCourse != null) {
+            price.setText(selectedCourse.getPrice() + "");
+        }
+    }
+
 }

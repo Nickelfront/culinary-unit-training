@@ -1,5 +1,9 @@
 package entity;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Client extends Base {
     static private String TB = "clients";
     
@@ -86,7 +90,15 @@ public class Client extends Base {
           
         relationships.put("course","client_id:course_id:client_course");
     }
-
+    
+    public List<Base> courses(){
+        try {
+            return this.belongsToMany("course", new Course());
+        } catch (Exception ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 
 }
