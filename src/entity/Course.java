@@ -123,7 +123,7 @@ public class Course extends Base {
 
         tableName = TB;
 
-        fields.put("courseId", "Int:id:deletable");
+        fields.put("courseId", "Int:id:unique_key");
         fields.put("title", "String:title");
         fields.put("startDate", "Date:start_date");
         fields.put("endDate", "Date:end_date");

@@ -145,4 +145,14 @@ public class BaseDBConnector implements BaseDBDriver {
         
         return null;
     }
+    
+    @Override
+    public void executeUpdate(String query) {
+        try {
+            Statement statement = db.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -73,7 +73,7 @@ public class Mentor extends Base{
     protected void configure() {
         tableName = TB;
         
-        fields.put("mentorId", "Int:id:deletable");
+        fields.put("mentorId", "Int:id:unique_key");
         fields.put("firstName", "String:first_name");
         fields.put("lastName", "String:last_name");
         fields.put("email", "String:email");

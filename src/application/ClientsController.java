@@ -319,11 +319,6 @@ public class ClientsController implements Initializable {
 
         displayResult(prevIndex);
         currentResult.setText(prevIndex + 1 + "");
-
-        //		Client prevResult = foundClients.get(prevIndex);
-//		foundClientName.setText(foundClientName.getText() + "\t" + prevResult.getFirstName() + " " + prevResult.getLastName());
-//		foundClientEmail.setText(foundClientEmail.getText() + "\t" + prevResult.getEmail());
-//		foundClientPhone.setText(foundClientPhone.getText() + "\t" + prevResult.getPhone());
     }
 
     @FXML

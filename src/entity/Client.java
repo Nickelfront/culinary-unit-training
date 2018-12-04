@@ -81,7 +81,7 @@ public class Client extends Base {
     protected void configure() {
         tableName = TB;
         
-        fields.put("clientId", "Int:id:deletable");
+        fields.put("clientId", "Int:id:unique_key");
         fields.put("firstName", "String:first_name");
         fields.put("lastName", "String:last_name");
         fields.put("email", "String:email");

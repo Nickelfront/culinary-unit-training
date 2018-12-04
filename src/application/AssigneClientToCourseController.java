@@ -7,6 +7,7 @@ package application;
 
 import entity.Client;
 import entity.Course;
+import helpers.MessageDisplay;
 import helpers.TableFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,9 +52,21 @@ public class AssigneClientToCourseController implements Initializable {
     @FXML
     private void registerClient(ActionEvent event) {
         try {
-            client.attach("course",
-                    coursesComboBox.getSelectionModel().getSelectedItem().getCourseId());
             Stage currentStage = (Stage) coursesComboBox.getScene().getWindow();
+
+            Course selectedCourse = coursesComboBox.getSelectionModel()
+                    .getSelectedItem();
+            if (selectedCourse.getAvailableSpots() == 0) {
+                MessageDisplay.info("Курса е запълнен!");
+                currentStage.close();
+                return;
+            }
+            
+            client.attach("course", selectedCourse.getCourseId());
+            selectedCourse.setAvailableSpots(
+                    selectedCourse.getAvailableSpots()-1
+            );
+            selectedCourse.update();
             currentStage.close();
         } catch (Exception ex) {
             Logger.getLogger(AssigneClientToCourseController.class.getName()).log(Level.SEVERE, null, ex);

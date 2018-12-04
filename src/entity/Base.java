@@ -23,7 +23,9 @@ import java.util.logging.Logger;
  * @author bozhidar
  */
 public abstract class Base {
-
+    
+    static protected String IDENTITY_KEY = "unique_key";
+    
     protected BaseDBDriver dbDriver;
 
     protected String tableName;
@@ -43,19 +45,11 @@ public abstract class Base {
         String deleteQuery = "DELETE FROM " + tableName + " WHERE ";
         for (Map.Entry<String, String> entry : fields.entrySet()) {
             String[] splitedDBFieldName = entry.getValue().split(":");
-            if (splitedDBFieldName.length >= 3 && splitedDBFieldName[2].equals("deletable")) {
+            if (splitedDBFieldName.length >= 3 && splitedDBFieldName[2].equals(IDENTITY_KEY)) {
                 try {
                     Method getter = model.getMethod(getMethodName(entry.getKey()));
                     deleteQuery += " " + splitedDBFieldName[1] + "='" + getter.invoke(this) + "' AND";
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SecurityException ex) {
-                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalArgumentException ex) {
-                    Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -84,17 +78,9 @@ public abstract class Base {
             try {
                 Method method = this.getClass().getMethod(methodName);
                 value = method.invoke(this).toString();
-            } catch (NoSuchMethodException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
             query += "'" + value + "',";
         }
 
@@ -160,21 +146,7 @@ public abstract class Base {
                 result.add(classInstance);
             }
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -226,5 +198,33 @@ public abstract class Base {
     
     public List<Base> belongsToMany(String relationship, Base relClass) throws Exception {
         return this.belongsToMany(relationship, relClass, "id");
+    }
+    
+    public Base update(){
+//        "UPDATE warehouses SET name = ? , capacity = ? WHERE id = ?"
+        String queryBase = "UPDATE "+tableName+" SET ";
+        String queryBody = "";
+        String queryWhere = " WHERE ";
+        for (Map.Entry<String, String> entry : fields.entrySet()) {
+            String methodName = getMethodName(entry.getKey());
+            String value = "";
+            String[] fieldOptions = entry.getValue().split(":");
+            try {
+                Method method = this.getClass().getMethod(methodName);
+                value = method.invoke(this).toString();
+            } catch (Exception ex) {
+                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            if(fieldOptions.length >= 3 && fieldOptions[2].equals(IDENTITY_KEY)){
+                queryWhere+= " "+fieldOptions[1]+"='"+value+"' ";
+            }else{
+                queryBody+= " "+fieldOptions[1]+"='"+value+"' ,";
+            }
+        }
+        queryBody = queryBody.substring(0, queryBody.length()-1);
+        
+        dbDriver.execute(queryBase+queryBody+queryWhere);
+        
+        return this;
     }
 }

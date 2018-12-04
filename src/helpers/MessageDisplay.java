@@ -9,4 +9,8 @@ public class MessageDisplay {
 		Alert alert = new Alert(AlertType.INFORMATION, "Няма резултати от търсенето.");
 		alert.showAndWait();
 	}
+        public static void info(String infoMsg) {
+		Alert alert = new Alert(AlertType.INFORMATION, infoMsg);
+		alert.showAndWait();
+	}
 }
