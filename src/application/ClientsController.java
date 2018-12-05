@@ -14,6 +14,9 @@ import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
@@ -34,6 +37,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -113,12 +117,19 @@ public class ClientsController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        clientsTable.setEditable(true);
         TableFactory.configureRow(idColumn, "clientId");
         TableFactory.configureRow(firstNameColumn, "firstName");
         TableFactory.configureRow(lastNameColumn, "lastName");
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
+
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        birthDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        emailColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         TableFactory.fill(clientsTable, new Client().all());
 
@@ -385,9 +396,9 @@ public class ClientsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignedCourses.fxml"));
             AssignedCoursesController controller = new AssignedCoursesController((Client) clientsTable.getSelectionModel().getSelectedItem());
             loader.setController(controller);
-            
+
             Parent root = loader.load();
-            
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Справка за Клиент");
@@ -398,5 +409,56 @@ public class ClientsController implements Initializable {
         } catch (Exception e) {
             System.err.print(e);
         }
+    }
+
+    private Client selectedItem() {
+        return clientsTable.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    public void updateClientFirstName(TableColumn.CellEditEvent<Client, String> event) {
+        selectedItem().setFirstName(event.getNewValue());
+        selectedItem().update();
+    }
+
+    @FXML
+    public void updateClientLastName(TableColumn.CellEditEvent<Client, String> event) {
+        selectedItem().setLastName(event.getNewValue());
+        selectedItem().update();
+    }
+
+    @FXML
+    public void updateClientBirthDate(TableColumn.CellEditEvent<Client, String> event) {
+        String newBirthDate = event.getNewValue();
+        if (!Validator.isValidFormat("yyyy-MM-dd", newBirthDate, Locale.ENGLISH)) {
+            MessageDisplay.info("Формата на датата не се поддържа! Моля използвайте yyyy-mm-dd, пример: 1997-02-25");
+            return;
+        }
+        
+        selectedItem().setBirthDate(newBirthDate);
+        selectedItem().update();
+    }
+
+    @FXML
+    public void updateClientPhone(TableColumn.CellEditEvent<Client, String> event) {
+        String newPhone = event.getNewValue();
+        if (!Validator.validatePhoneNumber(newPhone)) {
+            MessageDisplay.info("Грешен формат за телефон!");
+            return;
+        }
+        
+        selectedItem().setPhone(newPhone);
+        selectedItem().update();
+    }
+
+    @FXML
+    public void updateClientMail(TableColumn.CellEditEvent<Client, String> event) {
+        String newEmail = event.getNewValue();
+        if (!Validator.validateEmail(newEmail)) {
+            MessageDisplay.info("Грешен формат за E-mail!");
+            return;
+        }
+        selectedItem().setEmail(newEmail);
+        selectedItem().update();
     }
 }
