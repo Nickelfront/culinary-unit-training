@@ -35,7 +35,9 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteMentor" text="Изтрий" />
+                                  <MenuItem mnemonicParsing="false" onAction="#openCoursesInquery" text="Справка Курсове" />
+                                    <MenuItem mnemonicParsing="false" onAction="#openAssignView" text="Добави към курс" />
+                                    <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteMentor" text="Изтрий" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

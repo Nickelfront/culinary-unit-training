@@ -1,18 +1,19 @@
 package application;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
 import helpers.ImageLoader;
+import helpers.Session;
+import helpers.ThemeLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -40,27 +41,25 @@ public class SideMenuController implements Initializable {
 	JFXButton exitBtn;
 	@FXML
 	ImageView userBg;
+	@FXML
+	JFXButton settingsBtn;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Properties session = new Properties();
-		InputStream is = null;
-		try {
-			File file = new File("session.properties");
-			is = new FileInputStream(file);
-			session.load(is);
-		} catch (Exception e) {
-			is = null;
-		}
-
-		userName.setText(session.getProperty("loggedUser"));
+		Session session = new Session();
+		
+		userName.setText(session.get("loggedUser"));
 		userName.setStyle("-fx-stroke: #000");
 		userName.setStyle("-fx-stroke-width: 2px");
-		
-		String userPicturePath = session.getProperty("userPicture");
+
+		String userPicturePath = session.get("userPicture");
 		Image userPicture = ImageLoader.getInstance().loadImage(userPicturePath);
 		userImageHolder.setImage(userPicture);
-		System.out.println(userPicturePath);
+
+		ThemeLoader themeLoader = new ThemeLoader();
+		String userBgPath = "default-bg-" + themeLoader.get("current") + ".png";
+		Image userBgPicture = ImageLoader.getInstance().loadImage(userBgPath);
+		userBg.setImage(userBgPicture);
 		
 	}
 
@@ -74,7 +73,6 @@ public class SideMenuController implements Initializable {
 
 	@FXML
 	public void openClients() {
-
 		SceneLoader sceneLoader = SceneLoader.getInstance();
 
 		sceneLoader.switchScene("Clients");
@@ -95,6 +93,31 @@ public class SideMenuController implements Initializable {
 
 		sceneLoader.switchScene("Mentors");
 		sceneLoader.setContentLabel("Ментори");
+	}
+
+	@FXML
+	public void openSettings() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+		Parent settingsRoot;
+		try {
+			settingsRoot = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
+			stage.getIcons().add(icon);
+			stage.setTitle("Настройки");
+			stage.setResizable(false);
+			stage.setScene(new Scene(settingsRoot));
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			Alert alert = new Alert(AlertType.ERROR, "Възникна грешка.");
+			alert.showAndWait();
+			if (alert.getResult() != null) {
+				System.exit(1);
+			}
+		}
 	}
 
 	@FXML

@@ -5,8 +5,11 @@
  */
 package helpers;
 
+import entity.Base;
 import java.util.List;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
@@ -36,4 +39,24 @@ public class TableFactory {
     public static void configureRow(TableColumn tableId, String classProperty){
        tableId.setCellValueFactory(new PropertyValueFactory<>(classProperty));
     }
+    /**
+     * 
+     * @param table
+     * @param rows 
+     */
+    public static void fill(TableView table, List rows){
+        for (Object cl : rows) {
+            table.getItems().add(cl);
+        }
+    };
+    /**
+     * 
+     * @param table
+     * @param rows 
+     */
+    public static void fillComboBox(ComboBox box, List rows){
+        for (Object cl : rows) {
+            box.getItems().add(cl);
+        }
+    };
 }

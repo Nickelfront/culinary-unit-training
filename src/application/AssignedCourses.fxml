@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="assignedTable" prefHeight="593.0" prefWidth="938.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="62.0" text="Код" />
+          <TableColumn fx:id="nameColumn" prefWidth="166.0" text="Име" />
+            <TableColumn fx:id="infoColumn" prefWidth="253.0" text="Описание" />
+            <TableColumn fx:id="startColumn" prefWidth="130.0" text="Начало" />
+            <TableColumn fx:id="endColumn" prefWidth="165.0" text="Край" />
+            <TableColumn fx:id="priceColumn" prefWidth="161.0" text="Цена" />
+        </columns>
+      </TableView>
+      <Label layoutX="683.0" layoutY="599.0" prefHeight="28.0" prefWidth="76.0" text="Общо: " />
+      <Label fx:id="totalPrice" layoutX="759.0" layoutY="599.0" prefHeight="28.0" prefWidth="76.0" />
+   </children>
+</AnchorPane>

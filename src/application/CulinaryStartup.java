@@ -1,6 +1,8 @@
 package application;
 
+
 import helpers.ImageLoader;
+import helpers.ThemeLoader;
 import helpers.StyleSheetLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ public class CulinaryStartup extends Application {
 		StyleSheetLoader styleSheetLoader = new StyleSheetLoader();
 		styleSheetLoader.setContext(scene);
 		styleSheetLoader.loadStyleSheet("application");
+		styleSheetLoader.loadStyleSheet(new ThemeLoader().get("current"));
 		
 		Image icon = ImageLoader.getInstance().loadImage("cooking.png");
 //

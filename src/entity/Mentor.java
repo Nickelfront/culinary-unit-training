@@ -1,7 +1,12 @@
 package entity;
 
-public class Mentor {
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class Mentor extends Base{
+        static private String TB = "mentors";
+    
 	private int mentorId;
 	private String firstName;
 	private String lastName;
@@ -59,9 +64,35 @@ public class Mentor {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-
+        
+        public void setMentorId(int id) {
+		mentorId = id;
+	}
+        
 	public int getMentorId() {
 		return mentorId;
 	}
-	
+
+    @Override
+    protected void configure() {
+        tableName = TB;
+        
+        fields.put("mentorId", "Int:id:unique_key");
+        fields.put("firstName", "String:first_name");
+        fields.put("lastName", "String:last_name");
+        fields.put("email", "String:email");
+        fields.put("phone", "String:phone");
+        fields.put("salary", "Double:salary");
+        
+        relationships.put("course","mentor_id:course_id:mentor_course");
+    }
+    
+     public List<Base> courses(){
+        try {
+            return this.belongsToMany("course", new Course());
+        } catch (Exception ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
