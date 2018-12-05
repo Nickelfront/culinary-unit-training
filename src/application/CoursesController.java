@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -10,6 +11,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXSlider;
 
+import entity.Client;
 import entity.Course;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
@@ -17,7 +19,10 @@ import helpers.Validator;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -31,6 +36,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class CoursesController implements Initializable {
 
@@ -356,5 +362,37 @@ public class CoursesController implements Initializable {
         foundCourseMaxSpots.setText("Максимален брой места: ");
         foundCoursePrice.setText("Цена: ");
     }
+
+	@FXML public void openInquiryClientsView() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignedClientsToCourse.fxml"));
+        AssignedClientsToCourseController controller = new AssignedClientsToCourseController((Course) coursesTable.getSelectionModel().getSelectedItem());
+        loader.setController(controller);
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Справка за клиенти в курс");
+        stage.setResizable(false);
+        stage.setScene(scene);
+
+        stage.show();
+	}
+	
+	@FXML public void openInquiryMentorsView() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignedMentorsToCourse.fxml"));
+        AssignedMentorsToCourseController controller = new AssignedMentorsToCourseController((Course) coursesTable.getSelectionModel().getSelectedItem());
+        loader.setController(controller);
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Справка за ментори");
+        stage.setResizable(false);
+        stage.setScene(scene);
+
+        stage.show();
+	}
 
 }

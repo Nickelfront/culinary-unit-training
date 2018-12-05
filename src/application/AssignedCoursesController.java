@@ -64,7 +64,7 @@ public class AssignedCoursesController implements Initializable {
 
         List<Base> assignedCourses = client.courses();
 
-        TableFactory.fill(assignedTable, client.courses());
+        TableFactory.fill(assignedTable, assignedCourses);
 
         totalPrice.setText(calculateTotal(assignedCourses));
 

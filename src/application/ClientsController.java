@@ -401,7 +401,7 @@ public class ClientsController implements Initializable {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Справка за Клиент");
+            stage.setTitle("Справка за клиент");
             stage.setResizable(false);
             stage.setScene(scene);
 
@@ -431,7 +431,7 @@ public class ClientsController implements Initializable {
     public void updateClientBirthDate(TableColumn.CellEditEvent<Client, String> event) {
         String newBirthDate = event.getNewValue();
         if (!Validator.isValidFormat("yyyy-MM-dd", newBirthDate, Locale.ENGLISH)) {
-            MessageDisplay.info("Формата на датата не се поддържа! Моля използвайте yyyy-mm-dd, пример: 1997-02-25");
+            MessageDisplay.info("Форматът на датата не се поддържа! Моля използвайте yyyy-mm-dd, пример: 1997-02-25");
             return;
         }
         

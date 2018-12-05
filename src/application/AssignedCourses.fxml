@@ -17,7 +17,7 @@
             <TableColumn fx:id="priceColumn" prefWidth="161.0" text="Цена" />
         </columns>
       </TableView>
-      <Label layoutX="683.0" layoutY="599.0" prefHeight="28.0" prefWidth="76.0" text="Общо : " />
+      <Label layoutX="683.0" layoutY="599.0" prefHeight="28.0" prefWidth="76.0" text="Общо: " />
       <Label fx:id="totalPrice" layoutX="759.0" layoutY="599.0" prefHeight="28.0" prefWidth="76.0" />
    </children>
 </AnchorPane>
