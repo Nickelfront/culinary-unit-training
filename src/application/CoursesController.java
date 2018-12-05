@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXSlider;
-import entity.Base;
 
 import entity.Course;
 import helpers.MessageDisplay;
@@ -188,19 +187,19 @@ public class CoursesController implements Initializable {
 
     private int incrementID() {
         int lastItemID = 0;
-        
+
         if (!coursesTable.getItems().isEmpty()) {
             int lastItemIndex = coursesTable.getItems().size() - 1;
             lastItemID = coursesTable.getItems().get(lastItemIndex).getCourseId();
         }
-        
+
         return ++lastItemID;
     }
 
     @FXML
     public void deleteCourse() {
-
         Course selectedCourse = coursesTable.getSelectionModel().getSelectedItem();
+
         String courseName = selectedCourse.getTitle();
 
         ButtonType delete = new ButtonType("Изтрий", ButtonData.OK_DONE);

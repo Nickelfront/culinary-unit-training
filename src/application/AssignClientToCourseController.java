@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author bozhidar
  */
-public class AssigneClientToCourseController implements Initializable {
+public class AssignClientToCourseController implements Initializable {
 
     private Client client;
     @FXML
@@ -35,7 +35,7 @@ public class AssigneClientToCourseController implements Initializable {
     @FXML
     private Label price;
 
-    public AssigneClientToCourseController(Client cl) {
+    public AssignClientToCourseController(Client cl) {
         client = cl;
     }
 
@@ -62,14 +62,20 @@ public class AssigneClientToCourseController implements Initializable {
                 return;
             }
             
-            client.attach("course", selectedCourse.getCourseId());
+            String response = client.attach("course", selectedCourse.getCourseId());
+            
+            if(response.equals("19")){
+                MessageDisplay.info("Клиента вече е записан!");
+                return;
+            }
+            
             selectedCourse.setAvailableSpots(
                     selectedCourse.getAvailableSpots()-1
             );
             selectedCourse.update();
             currentStage.close();
         } catch (Exception ex) {
-            Logger.getLogger(AssigneClientToCourseController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AssignClientToCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

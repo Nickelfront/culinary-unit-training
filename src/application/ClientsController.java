@@ -373,8 +373,8 @@ public class ClientsController implements Initializable {
     @FXML
     private void handleRegisterToCourse(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AssigneClientToCourse.fxml"));
-            AssigneClientToCourseController controller = new AssigneClientToCourseController((Client) clientsTable.getSelectionModel().getSelectedItem());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignClientToCourse.fxml"));
+            AssignClientToCourseController controller = new AssignClientToCourseController((Client) clientsTable.getSelectionModel().getSelectedItem());
             loader.setController(controller);
             Parent root = loader.load();
 

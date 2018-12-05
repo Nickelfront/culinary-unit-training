@@ -22,7 +22,9 @@ public class BaseDBConnector implements BaseDBDriver {
 
     private final String dbName = "uber_cheff.db";
     protected Connection db;
-
+    
+    protected String errorCode = null;
+    
     static private BaseDBConnector instance;
 
     /**
@@ -42,7 +44,11 @@ public class BaseDBConnector implements BaseDBDriver {
         }
         return instance;
     }
-
+    
+    public String getErrorCode(){
+        return errorCode;
+    }
+    
     /**
      * Make initial connection to the internal DB
      *
@@ -88,12 +94,19 @@ public class BaseDBConnector implements BaseDBDriver {
                 + "salary decimal(10,2),"
                 + "primary key(id)"
                 + ");");
-        
         script.execute("CREATE TABLE IF NOT EXISTS client_course("
                 + "client_id integer NOT NULL ,"
                 + "course_id integer NOT NULL ,"
                 + "FOREIGN KEY (client_id) REFERENCES clients(id),"
-                + "FOREIGN KEY (course_id) REFERENCES courses(id));");
+                + "FOREIGN KEY (course_id) REFERENCES courses(id),"
+                + "PRIMARY KEY (client_id,course_id));");
+        
+        script.execute("CREATE TABLE IF NOT EXISTS mentor_course("
+                + "mentor_id integer NOT NULL ,"
+                + "course_id integer NOT NULL ,"
+                + "FOREIGN KEY (mentor_id) REFERENCES mentors(id),"
+                + "FOREIGN KEY (course_id) REFERENCES courses(id),"
+                + "PRIMARY KEY (mentor_id,course_id));");
   
 //             System.out.println(tableExists("clients"));
     }
@@ -117,7 +130,9 @@ public class BaseDBConnector implements BaseDBDriver {
             statement.execute(query);
         } catch (SQLException ex) {
             Logger.getLogger(BaseDBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            errorCode = ex.getErrorCode()+"";
         }
+        
         return this;
     }
     

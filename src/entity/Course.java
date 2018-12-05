@@ -3,6 +3,7 @@ package entity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -130,6 +131,39 @@ public class Course extends Base {
         fields.put("availableSpots", "Int:available_spots");
         fields.put("price", "Double:price");
         fields.put("description", "String:description");
-      
+
+        relationships.put("mentor","course_id:mentor_id:mentor_course");
+        relationships.put("client","course_id:client_id:client_course");
+    }
+    
+    /**
+     * 
+     * Many to Many relationship
+     * 
+     * @return 
+     */
+    public List<Base> clients(){
+        try {
+            return this.belongsToMany("client", new Client());
+        } catch (Exception ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Many to Many relationship
+     * 
+     * @return 
+     */
+    public List<Base> mentors(){
+        try {
+            return this.belongsToMany("mentor", new Mentor());
+        } catch (Exception ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 }
