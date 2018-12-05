@@ -88,7 +88,7 @@ public class Client extends Base {
         fields.put("birthDate", "String:birth_date");
         fields.put("phone", "String:phone");
           
-        relationships.put("course","client_id:course_id:client_course");
+        relationships.put("course", "client_id:course_id:client_course");
     }
     
     public List<Base> courses(){

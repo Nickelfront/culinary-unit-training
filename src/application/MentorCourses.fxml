@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="646.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="coursesTable" prefHeight="646.0" prefWidth="897.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="109.0" text="ID" />
+          <TableColumn fx:id="titleColumn" prefWidth="224.0" text="Име на курса" />
+            <TableColumn fx:id="startDateColumn" prefWidth="282.0" text="Начална дата" />
+            <TableColumn fx:id="endDateColumn" prefWidth="281.0" text="Крайна дата" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
