@@ -26,11 +26,11 @@
                         <TableView fx:id="mentorsTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false" styleClass="table">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="121.0" resizable="false" text="ID" />
-                            <TableColumn fx:id="firstNameColumn" minWidth="-1.0" prefWidth="176.0" resizable="false" text="Име" />
-                              <TableColumn fx:id="lastNameColumn" minWidth="-1.0" prefWidth="193.0" resizable="false" text="Фамилия" />
-                              <TableColumn fx:id="phoneColumn" minWidth="-1.0" prefWidth="142.0" resizable="false" text="Телефон" />
-                              <TableColumn fx:id="emailColumn" minWidth="-1.0" prefWidth="166.0" resizable="false" text="E-Mail" />
-                              <TableColumn fx:id="salaryColumn" minWidth="-1.0" prefWidth="104.0" resizable="false" text="Заплата" />
+                            <TableColumn fx:id="firstNameColumn" minWidth="-1.0" onEditCommit="#updateMentorFirstName" prefWidth="176.0" resizable="false" text="Име" />
+                              <TableColumn fx:id="lastNameColumn" minWidth="-1.0" onEditCommit="#updateMentorLastName" prefWidth="193.0" resizable="false" text="Фамилия" />
+                              <TableColumn fx:id="phoneColumn" minWidth="-1.0" onEditCommit="#updateMentorPhone" prefWidth="142.0" resizable="false" text="Телефон" />
+                              <TableColumn fx:id="emailColumn" minWidth="-1.0" onEditCommit="#updateMentorEmail" prefWidth="166.0" resizable="false" text="E-Mail" />
+                              <TableColumn fx:id="salaryColumn" minWidth="-1.0" onEditCommit="#updateMentorSalary" prefWidth="104.0" resizable="false" text="Заплата" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>

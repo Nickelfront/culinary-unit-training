@@ -30,7 +30,6 @@ public class SceneLoader {
 		fxmlFile += ".fxml";
 		
 		try {
-			System.out.println(fxmlFile);
 			AnchorPane loadedPane = FXMLLoader.load(getClass().getResource(fxmlFile));
 			
 			// clear container of its previous contents before loading the new ones

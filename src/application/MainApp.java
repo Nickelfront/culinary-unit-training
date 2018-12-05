@@ -4,9 +4,8 @@ import java.io.IOException;
 
 import DB.BaseDBConnector;
 import helpers.ImageLoader;
-import helpers.Session;
-import helpers.ThemeLoader;
 import helpers.StyleSheetLoader;
+import helpers.ThemeLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +25,7 @@ public class MainApp extends Application {
 
 		try {
 
+			@SuppressWarnings("unused")
 			BaseDBConnector dc = BaseDBConnector.getInstance();
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
 			Scene scene = new Scene(root);

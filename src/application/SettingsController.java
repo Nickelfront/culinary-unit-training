@@ -19,7 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SettingsController implements Initializable { // TODO: Create settings for theme
+public class SettingsController implements Initializable {
 
 	@FXML
 	AnchorPane settingsWindow;
@@ -36,7 +36,8 @@ public class SettingsController implements Initializable { // TODO: Create setti
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObservableList<String> themes = FXCollections.observableArrayList("Orange", "Brown", "Teal", "Green", "Pink", "Purple");
+		ObservableList<String> themes = FXCollections.observableArrayList("Orange", "Brown", "Teal", "Green", "Pink",
+				"Purple");
 		themesList.getItems().addAll(themes);
 		currentTheme.setText(currentTheme.getText() + " " + new ThemeLoader().get("current"));
 	}
@@ -52,12 +53,12 @@ public class SettingsController implements Initializable { // TODO: Create setti
 		ThemeLoader theme = new ThemeLoader();
 
 		String choice = themesList.getSelectionModel().getSelectedItem().toString().toLowerCase();
-		
+
 		if (oldSettingsChoice.isSelected()) {
 			choice = theme.get("default");
 		}
 		theme.set("current", choice);
-		
+
 		try {
 			theme.save();
 		} catch (IOException e) {
@@ -66,11 +67,6 @@ public class SettingsController implements Initializable { // TODO: Create setti
 		Alert alert = new Alert(AlertType.INFORMATION, "Промените ще се приложат при следващото стартиране.");
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.OK) {
-//			try {
-//				new CulinaryStartup().start(new Stage());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
 			Stage stage = (Stage) saveBtn.getScene().getWindow();
 			stage.close();
 		}

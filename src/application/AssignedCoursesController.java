@@ -5,15 +5,15 @@
  */
 package application;
 
+import java.net.URL;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import entity.Base;
 import entity.Client;
 import entity.Course;
 import helpers.TableFactory;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

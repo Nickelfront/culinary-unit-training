@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -7,18 +8,15 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import entity.Client;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -125,9 +123,6 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
 
-        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        birthDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         emailColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
@@ -229,17 +224,13 @@ public class ClientsController implements Initializable {
         foundClients = new ArrayList<Client>();
 
         if (searchedClientName.getText().contains(" ")) {
-            // String[] fullName = searchedClientName.getText().split(" ");
             String name = searchedClientName.getText();
             for (Client client : clientsList) {
-                // if (fullName[0].equals(client.getFirstName())) {
-                // if (fullName[1].equals(client.getLastName())) {
                 if (name.equals(client.getFirstName() + " " + client.getLastName())) {
                     foundClients.add(client);
                     System.out.println(client);
                 }
             }
-            // }
         } else {
             String name = searchedClientName.getText();
             for (Client client : clientsList) {

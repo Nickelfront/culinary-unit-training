@@ -29,12 +29,12 @@
                         <TableView fx:id="coursesTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false" styleClass="table">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="67.0" resizable="false" text="ID" />
-                            <TableColumn fx:id="titleColumn" minWidth="-1.0" prefWidth="142.0" resizable="false" text="Име на курса" />
-                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="167.0" resizable="false" text="Описание" />
+                            <TableColumn fx:id="titleColumn" minWidth="-1.0" onEditCommit="#updateCourseTitle" prefWidth="142.0" resizable="false" text="Име на курса" />
+                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" onEditCommit="#updateCourseDescription" prefWidth="167.0" resizable="false" text="Описание" />
                               <TableColumn fx:id="startDateColumn" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Начална дата" />
                               <TableColumn fx:id="endDateColumn" minWidth="-1.0" prefWidth="113.0" resizable="false" text="Крайна дата" />
-                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
-                              <TableColumn fx:id="priceColumn" prefWidth="104.0" resizable="false" text="Цена" />
+                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" onEditCommit="#updateAvailableSpots" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
+                              <TableColumn fx:id="priceColumn" onEditCommit="#updateCoursePrice" prefWidth="104.0" resizable="false" text="Цена" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>
