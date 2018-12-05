@@ -157,9 +157,11 @@ public abstract class Base {
      *
      * @param relationship
      * @param id
+     * @return String
+     * 
      * @throws Exception
      */
-    public void attach(String relationship, int id) throws Exception {
+    public String attach(String relationship, int id) throws Exception {
         String relation = this.relationships.get(relationship);
 
         if (relation == null) {
@@ -174,6 +176,12 @@ public abstract class Base {
                 + "'" + idGetter.invoke(this) + "','" + id + "');";
 
         dbDriver.execute(relationCreator);
+        String response = "success";
+        if (dbDriver.getErrorCode() != null) {
+            response = dbDriver.getErrorCode();
+        }
+        
+        return response;
     }
 
     public List<Base> belongsToMany(String relationship, Base relClass, String customIdentifier) throws Exception {

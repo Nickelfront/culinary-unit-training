@@ -16,4 +16,5 @@ public interface BaseDBDriver {
     ResultSet getAllFrom(String tableName);
     void executeUpdate(String query);
     ResultSet executeQuery(String query);
+    String getErrorCode();
 }
