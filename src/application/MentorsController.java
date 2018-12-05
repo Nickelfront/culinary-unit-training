@@ -1,5 +1,6 @@
 package application;
 
+import entity.Client;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -24,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class MentorsController implements Initializable {
 
@@ -57,7 +62,7 @@ public class MentorsController implements Initializable {
 
     @FXML
     TextField salary;
-
+    
     @FXML
     MenuItem deleteRightClick;
 
@@ -113,12 +118,9 @@ public class MentorsController implements Initializable {
 
         TableFactory.fill(mentorsTable, new Mentor().all());
 
-        mentorsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getButton() == MouseButton.SECONDARY) {
-                    deleteRightClick.setDisable(tableIsEmpty());
-                }
+        mentorsTable.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                deleteRightClick.setDisable(tableIsEmpty());
             }
         });
     }
@@ -342,5 +344,47 @@ public class MentorsController implements Initializable {
         foundMentorName.setText("Име и фамилия:");
         foundMentorPhone.setText("Телефон:");
         foundMentorEmail.setText("Email:");
+    }
+
+    @FXML
+    private void openCoursesInquery(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MentorCourses.fxml"));
+            MentorCoursesController controller = new MentorCoursesController((Mentor) mentorsTable.getSelectionModel().getSelectedItem());
+            loader.setController(controller);
+
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Справка за Ментор");
+            stage.setResizable(false);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (Exception e) {
+            System.err.print(e);
+        }
+    }
+
+    @FXML
+    private void openAssignView(ActionEvent event) {
+          try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignMentorToCourse.fxml"));
+            AssignMentorToCourseController controller = new AssignMentorToCourseController((Mentor) mentorsTable.getSelectionModel().getSelectedItem());
+            loader.setController(controller);
+
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Справка за Ментор");
+            stage.setResizable(false);
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (Exception e) {
+            System.err.print(e);
+        }
     }
 }
