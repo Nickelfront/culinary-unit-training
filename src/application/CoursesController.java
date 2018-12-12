@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXSlider;
 
 import entity.Course;
+import helpers.Message;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
@@ -22,7 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -82,7 +82,7 @@ public class CoursesController implements Initializable {
 	MenuItem deleteRightClick;
 
 	@FXML
-	TextField searchedCourseTitle;
+	TextField searchedKeyword;
 
 	@FXML
 	Button searchByTitleBtn;
@@ -149,7 +149,7 @@ public class CoursesController implements Initializable {
 		descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		availableSpotsColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 		priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		
+
 		TableFactory.fill(coursesTable, new Course().all());
 
 		coursesTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -165,11 +165,34 @@ public class CoursesController implements Initializable {
 	@FXML
 	public void handleAddCourses() {
 		Course course = new Course();
-
+		String title = courseTitle.getText();
+		String maxSpots = courseMaxAvailableSpots.getText();
+		String price = coursePrice.getText();
+		
+		if (title.isEmpty()) {
+			Message.displayInfo("Не сте въвели име на курса!");
+			Validator.setFieldInputAsInvalid(courseTitle);
+			return;
+		}
+		if (maxSpots.isEmpty()) {
+			Message.displayInfo("Не сте въвели брой места!");
+			Validator.setFieldInputAsInvalid(courseMaxAvailableSpots);
+			return;
+		}
+		if (courseStartDate.getValue() == null) {
+			Message.displayInfo("Не сте избрали начална дата!");
+			return;
+		}
+		if (courseEndDate.getValue() == null) {
+			courseEndDate.setValue(courseStartDate.getValue());
+		}
+		if (price.isEmpty()) {
+			Message.displayInfo("Не сте посочили цена!");
+			Validator.setFieldInputAsInvalid(coursePrice);
+			return;
+		}
 		if (!Validator.validateDates(courseStartDate.getValue(), courseEndDate.getValue())) {
-			Alert al = new Alert(Alert.AlertType.INFORMATION);
-			al.setContentText("Невалиден период от време.");
-			al.show();
+			Message.displayInfo("Невалиден период от време!");
 			return;
 		}
 
@@ -177,12 +200,12 @@ public class CoursesController implements Initializable {
 		Date endDate = Date.from(Instant.from(courseEndDate.getValue().atStartOfDay(ZoneId.systemDefault())));
 
 		course.setCourseId(incrementID());
-		course.setTitle(courseTitle.getText());
+		course.setTitle(title);
 		course.setDescription(courseDescription.getText());
 		course.setStartDate(startDate);
 		course.setEndDate(endDate);
-		course.setAvailableSpots(Integer.parseInt(courseMaxAvailableSpots.getText()));
-		course.setPrice(Double.parseDouble(coursePrice.getText()));
+		course.setAvailableSpots(Integer.parseInt(maxSpots));
+		course.setPrice(Double.parseDouble(price));
 
 		coursesTable.getItems().add(course); // TODO: if possible, find a way to show a readable date in the table view
 												// as well
@@ -192,12 +215,17 @@ public class CoursesController implements Initializable {
 
 	@FXML
 	public void handleClearForm() {
-		courseTitle.setText("");
+
+		TextField[] all = { courseTitle, courseMaxAvailableSpots, coursePrice};
+		for(TextField field : all) {
+			field.setText("");
+			Validator.resetField(field);
+		}
+		
 		courseDescription.setText("");
 		courseStartDate.setValue(null);
 		courseEndDate.setValue(null);
-		courseMaxAvailableSpots.setText("");
-		coursePrice.setText("");
+
 	}
 
 	private int incrementID() {
@@ -220,10 +248,10 @@ public class CoursesController implements Initializable {
 		ButtonType delete = new ButtonType("Изтрий", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
 
-		Alert al = new Alert(Alert.AlertType.CONFIRMATION,
-				"Сигурни ли сте, че искате да изтриете следния курс: \n\t" + courseName, delete, cancel);
-		al.showAndWait();
-		if (al.getResult().equals(delete)) {
+		ButtonType[] buttons = { delete, cancel };
+
+		if (Message.prompt("Сигурни ли сте, че искате да изтриете следния курс: \n\t" + courseName, buttons)
+				.equals(delete)) {
 			coursesTable.getItems().remove(selectedCourse);
 			selectedCourse.delete();
 		}
@@ -236,13 +264,15 @@ public class CoursesController implements Initializable {
 	@FXML
 	public void searchByTitle() {
 		clearResults();
-		String title = searchedCourseTitle.getText();
+		String keywords = searchedKeyword.getText();
 		ObservableList<Course> coursesList = coursesTable.getItems();
 
 		foundCourses = new ArrayList<Course>();
 
 		for (Course course : coursesList) {
-			if (!title.isEmpty() && course.getTitle().toLowerCase().contains(title)) {
+			boolean titleContainsKeywords = course.getTitle().toLowerCase().contains(keywords);
+			boolean descContainsKeywords = course.getDescription().toLowerCase().contains(keywords);
+			if (!keywords.isEmpty() && (titleContainsKeywords || descContainsKeywords)) {
 				foundCourses.add(course);
 			}
 		}

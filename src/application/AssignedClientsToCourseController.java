@@ -8,11 +8,11 @@ import entity.Base;
 import entity.Client;
 import entity.Course;
 import helpers.TableFactory;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class AssignedClientsToCourseController implements Initializable {
 

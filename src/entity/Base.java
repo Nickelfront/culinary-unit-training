@@ -188,7 +188,7 @@ public abstract class Base {
         String relation = this.relationships.get(relationship);
 
         if (relation == null) {
-            throw new Exception("Relationsipt is not speciefied");
+            throw new Exception("Relationsip is not specified");
         }
 
         String[] relationOptions = relation.split(":");

@@ -16,62 +16,68 @@ import javafx.scene.control.TextField;
 
 public class Validator {
 
-    public static boolean validatePhoneNumber(String phoneNumber) {
-        String regex = "0[\\d]{9}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phoneNumber);
+	public static boolean validatePhoneNumber(String phoneNumber) {
+		String regex = "0[\\d]{9}";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(phoneNumber);
 
-        return matcher.matches();
-    }
+		return matcher.matches();
+	}
 
-    public static boolean validateEmail(String email) {
-        String regex = "[\\w\\d\\-]+@[\\w\\d]+\\.[\\w]{2,}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
+	public static boolean validateEmail(String email) {
+		String regex = "[\\w\\d\\-]+@[\\w\\d]+\\.[\\w]{2,}";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
 
-        return matcher.matches();
-    }
+		return matcher.matches();
+	}
 
-    public static boolean validateAge(LocalDate birthDateInput) {
-        Date birthDate = Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault())));
+	public static boolean validateAge(LocalDate birthDateInput) {
+		if (birthDateInput == null) {
+			return false;
+		}
+		Date birthDate = Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault())));
 
-        return DateManager.getYearDifference(birthDate) > 16;
-    }
+		return DateManager.getYearDifference(birthDate) > 16;
+	}
 
-    public static boolean validateDates(LocalDate startDate, LocalDate endDate) {
-        return startDate.compareTo(endDate) < 1;
-    }
+	public static boolean validateDates(LocalDate startDate, LocalDate endDate) {
+		return startDate.compareTo(endDate) < 1;
+	}
 
-    public static void setFieldInputAsInvalid(TextField textField) {
-        textField.setStyle("-fx-border-color: #D50000");
-    }
+	public static void setFieldInputAsInvalid(TextField textField) {
+		textField.setStyle("-fx-border-color: #D50000");
+	}
 
-    public static boolean isValidFormat(String format, String value, Locale locale) {
-        LocalDateTime ldt = null;
-        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
+	public static boolean isValidFormat(String format, String value, Locale locale) {
+		LocalDateTime ldt = null;
+		DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
 
-        try {
-            ldt = LocalDateTime.parse(value, fomatter);
-            String result = ldt.format(fomatter);
-            return result.equals(value);
-        } catch (DateTimeParseException e) {
-            try {
-                LocalDate ld = LocalDate.parse(value, fomatter);
-                String result = ld.format(fomatter);
-                return result.equals(value);
-            } catch (DateTimeParseException exp) {
-                try {
-                    LocalTime lt = LocalTime.parse(value, fomatter);
-                    String result = lt.format(fomatter);
-                    return result.equals(value);
-                } catch (DateTimeParseException e2) {
-                    // Debugging purposes
-                    //e2.printStackTrace();
-                }
-            }
-        }
+		try {
+			ldt = LocalDateTime.parse(value, fomatter);
+			String result = ldt.format(fomatter);
+			return result.equals(value);
+		} catch (DateTimeParseException e) {
+			try {
+				LocalDate ld = LocalDate.parse(value, fomatter);
+				String result = ld.format(fomatter);
+				return result.equals(value);
+			} catch (DateTimeParseException exp) {
+				try {
+					LocalTime lt = LocalTime.parse(value, fomatter);
+					String result = lt.format(fomatter);
+					return result.equals(value);
+				} catch (DateTimeParseException e2) {
+					// Debugging purposes
+					// e2.printStackTrace();
+				}
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
+	public static void resetField(TextField field) {
+		field.setStyle("-fx-border-color: none");
+	}
 }

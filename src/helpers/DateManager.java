@@ -1,11 +1,14 @@
 package helpers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateManager {
+	
+	private final static String DATE_FORMAT = "dd.MM.yyyy, HH:mm";
 
 	public static int getYearDifference(Date date) {
 		Date today = new Date();
@@ -22,10 +25,20 @@ public class DateManager {
 		return cal;
 	}
 
-	public static String toReadableDate(Date date) {
-		DateFormat dfFull = new SimpleDateFormat("dd.MM.yyyy");
+	public static String toReadableDateString(Date date) {
+		DateFormat dfFull = new SimpleDateFormat(DATE_FORMAT);
 		String dateString = dfFull.format(date);
 		return dateString;
+	}
+	
+	public static Date toReadableDate(Date date) {
+		try {
+			String d = toReadableDateString(date);
+//			System.out.println(d);
+			return new SimpleDateFormat(DATE_FORMAT).parse(d);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 
 	public static String toReadableTime(Date date) {
@@ -35,6 +48,6 @@ public class DateManager {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(toReadableTime(new Date()));
+		System.out.println(toReadableDate(new Date()));
 	}
 }

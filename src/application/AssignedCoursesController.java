@@ -13,12 +13,15 @@ import java.util.ResourceBundle;
 import entity.Base;
 import entity.Client;
 import entity.Course;
+import helpers.ImageLoader;
 import helpers.TableFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -55,6 +58,7 @@ public class AssignedCoursesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         TableFactory.configureRow(idColumn, "courseId");
         TableFactory.configureRow(nameColumn, "title");
         TableFactory.configureRow(startColumn, "startDate");
@@ -67,7 +71,6 @@ public class AssignedCoursesController implements Initializable {
         TableFactory.fill(assignedTable, assignedCourses);
 
         totalPrice.setText(calculateTotal(assignedCourses));
-
     }
 
     private String calculateTotal(List assignedCourses) {

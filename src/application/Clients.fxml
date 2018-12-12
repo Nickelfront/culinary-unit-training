@@ -107,8 +107,8 @@
                               <DatePicker fx:id="birthDate" layoutX="62.0" layoutY="192.0" prefHeight="29.0" prefWidth="335.0" promptText="Рождена дата" />
                               <TextField fx:id="phone" layoutX="62.0" layoutY="229.0" prefHeight="29.0" prefWidth="335.0" promptText="Телефон" />
                               <TextField fx:id="email" layoutX="62.0" layoutY="266.0" prefHeight="29.0" prefWidth="335.0" promptText="E-Mail" />
-                              <Button layoutX="62.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleAddClient" prefHeight="29.0" prefWidth="115.0" text="Добави" />
-                              <Button layoutX="281.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="115.0" text="Изчисти" />
+                              <Button layoutX="62.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleAddClient" prefHeight="30.0" prefWidth="135.0" text="Добави" />
+                              <Button layoutX="257.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="30.0" prefWidth="135.0" text="Изчисти" />
                            </children>
                         </Pane>
                      </content></Tab>

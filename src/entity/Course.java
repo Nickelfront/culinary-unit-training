@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import helpers.DateManager;
+
 public class Course extends Base {
 
-    static private String TB = "courses";
-    static private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.S";
+    private static String TB = "courses";
+    private static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.S";
+//    static private String DATE_FORMAT = "dd.MM.yyyy, HH:mm";
+
     private int courseId;
     private String title;
     private Date startDate;
@@ -49,15 +53,19 @@ public class Course extends Base {
     }
 
     public String getStartDate() {
+    	System.out.println("getStartDate on " + this);
         return new SimpleDateFormat(DATE_FORMAT).format(startDate);
+//    	return DateManager.toReadableDateString(this.startDate);
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return new SimpleDateFormat(DATE_FORMAT).format(endDate);
+    	this.startDate = startDate;
+    	System.out.println("setStartDate on " + this);
+//        try {
+//			this.endDate = new SimpleDateFormat(DATE_FORMAT).parse(getStartDate());
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
     }
 
     public Date getParsedStartDate() {
@@ -67,6 +75,23 @@ public class Course extends Base {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+//    	return DateManager.toReadableDate(this.startDate);
+    }
+
+    public String getEndDate() {
+    	System.out.println("getEndDate on " + this);
+    	return new SimpleDateFormat(DATE_FORMAT).format(endDate);
+//    	return DateManager.toReadableDateString(this.endDate);
+    }
+
+    public void setEndDate(Date endDate) {
+    	this.endDate = endDate;
+    	System.out.println("setEndDate on " + this);
+//        try {
+//			this.endDate = new SimpleDateFormat(DATE_FORMAT).parse(getEndDate());
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
     }
 
     public Date getParsedEndDate() {
@@ -76,10 +101,7 @@ public class Course extends Base {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+//    	return DateManager.toReadableDate(this.endDate);
     }
 
     public int getAvailableSpots() {

@@ -103,8 +103,8 @@
                               <TextField fx:id="phone" layoutX="62.0" layoutY="196.0" prefHeight="29.0" prefWidth="335.0" promptText="Телефон" />
                               <TextField fx:id="email" layoutX="62.0" layoutY="234.0" prefHeight="29.0" prefWidth="335.0" promptText="E-Mail" />
                               <TextField fx:id="salary" layoutX="62.0" layoutY="271.0" prefHeight="29.0" prefWidth="335.0" promptText="Заплата" />
-                              <Button layoutX="79.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleAddMentor" prefHeight="29.0" prefWidth="150.0" text="Добави" />
-                              <Button layoutX="251.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="165.0" text="Изчисти" />
+                              <Button layoutX="59.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleAddMentor" prefHeight="30.0" prefWidth="140.0" text="Добави" />
+                              <Button layoutX="262.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="30.0" prefWidth="140.0" text="Изчисти" />
                            </children>
                         </Pane>
                      </content></Tab>

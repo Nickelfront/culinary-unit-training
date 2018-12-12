@@ -1,6 +1,7 @@
 package helpers;
 
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class ImageLoader {
 
@@ -18,5 +19,10 @@ public class ImageLoader {
 
 	public Image loadImage(String imagePath) {
 		return new Image(getClass().getResourceAsStream("../resources/" + imagePath));
+	}
+	
+	public void setIcon(String imagePath, Stage stage) {
+		Image icon = this.loadImage(imagePath);
+		stage.getIcons().add(icon);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import entity.Mentor;
+import helpers.Message;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
@@ -16,7 +17,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -132,43 +132,50 @@ public class MentorsController implements Initializable {
 
 	@FXML
 	private void handleAddMentor(ActionEvent event) {
+		String mentorFirstName = firstName.getText();
+		String mentorLastName = lastName.getText();
 		String mentorEmail = email.getText();
 		String mentorPhoneNumber = phone.getText();
-
+		String mentorSalary = salary.getText();
+		
+		if (mentorFirstName.isEmpty() || mentorLastName.isEmpty()) {
+			Message.displayInfo("Не сте въвели имена на ментор!");
+			Validator.setFieldInputAsInvalid(mentorFirstName.isEmpty() ? firstName : lastName);
+			return;
+		}
 		if (!Validator.validateEmail(mentorEmail)) {
-			Alert al = new Alert(Alert.AlertType.INFORMATION);
-			al.setContentText("Невалиден e-Mail!");
+			Message.displayInfo("Невалиден e-Mail!");
 			Validator.setFieldInputAsInvalid(email);
-			al.show();
 			return;
 		}
 		if (!Validator.validatePhoneNumber(mentorPhoneNumber)) {
-			Alert al = new Alert(Alert.AlertType.INFORMATION);
-			al.setContentText("Невалиден телефонен номер.");
+			Message.displayInfo("Невалиден телефонен номер.");
 			Validator.setFieldInputAsInvalid(phone);
-			al.show();
+			return;
+		}
+		if(mentorSalary.isEmpty()) {
+			Message.displayInfo("Не сте въвели заплата за този ментор!");
+			Validator.setFieldInputAsInvalid(phone);
 			return;
 		}
 
-		Mentor mentor = new Mentor(incrementID(), firstName.getText(), lastName.getText(), mentorPhoneNumber,
+		Mentor mentor = new Mentor(incrementID(), mentorFirstName, mentorLastName, mentorPhoneNumber,
 				mentorEmail, Double.parseDouble(salary.getText()));
 		mentor.save();
 		mentorsTable.getItems().add(mentor);
 
-		firstName.setText("");
-		lastName.setText("");
-		email.setText("");
-		phone.setText("");
-		salary.setText("");
+		handleClearForm();
 	}
 
 	@FXML
 	public void handleClearForm() {
-		firstName.setText("");
-		lastName.setText("");
-		email.setText("");
-		phone.setText("");
-		salary.setText("");
+		
+		TextField[] all = { firstName, lastName, email, phone, salary };
+		
+		for(TextField field : all) {
+			field.setText("");
+			Validator.resetField(field);
+		}
 	}
 
 	private int incrementID() {
@@ -189,10 +196,8 @@ public class MentorsController implements Initializable {
 		ButtonType delete = new ButtonType("Изтрий", ButtonData.OK_DONE);
 		ButtonType cancel = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
 
-		Alert al = new Alert(Alert.AlertType.CONFIRMATION,
-				"Сигурни ли сте, че искате да изтриете следния ментор: \n\t" + mentorName, delete, cancel);
-		al.showAndWait();
-		if (al.getResult().equals(delete)) {
+		ButtonType[] buttons = { delete, cancel };
+		if (Message.prompt("Сигурни ли сте, че искате да изтриете следния ментор: \n\t" + mentorName, buttons).equals(delete)) {
 			selectedMentor.delete();
 			mentorsTable.getItems().remove(selectedMentor);
 		}
@@ -209,17 +214,13 @@ public class MentorsController implements Initializable {
 		foundMentors = new ArrayList<Mentor>();
 
 		if (searchedMentorName.getText().contains(" ")) {
-			// String[] fullName = searchedMentorName.getText().split(" ");
 			String name = searchedMentorName.getText();
 			for (Mentor mentor : mentorsList) {
-				// if (fullName[0].equals(Mentor.getFirstName())) {
-				// if (fullName[1].equals(Mentor.getLastName())) {
 				if (name.equals(mentor.getFirstName() + " " + mentor.getLastName())) {
 					foundMentors.add(mentor);
 					System.out.println(mentor);
 				}
 			}
-			// }
 		} else {
 			String name = searchedMentorName.getText();
 			for (Mentor mentor : mentorsList) {

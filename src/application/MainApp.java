@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -35,8 +34,9 @@ public class MainApp extends Application {
 			styleSheetLoader.loadStyleSheet("application");
 			styleSheetLoader.loadStyleSheet(new ThemeLoader().get("current"));
 
-			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
-			stage.getIcons().add(icon);
+//			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
+//			stage.getIcons().add(icon);
+			ImageLoader.getInstance().setIcon("cooking.png", stage);
 			stage.setResizable(false);
 			stage.setScene(scene);
 			stage.setTitle("UberChef - организатор");
