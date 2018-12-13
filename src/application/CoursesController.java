@@ -140,8 +140,8 @@ public class CoursesController implements Initializable {
 		TableFactory.configureRow(idColumn, "courseId");
 		TableFactory.configureRow(titleColumn, "title");
 		TableFactory.configureRow(descriptionColumn, "description");
-		TableFactory.configureRow(startDateColumn, "startDate");
-		TableFactory.configureRow(endDateColumn, "endDate");
+		TableFactory.configureRow(startDateColumn, "displayStartDate");
+		TableFactory.configureRow(endDateColumn, "displayEndDate");
 		TableFactory.configureRow(availableSpotsColumn, "availableSpots");
 		TableFactory.configureRow(priceColumn, "price");
 

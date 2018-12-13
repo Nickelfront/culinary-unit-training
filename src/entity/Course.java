@@ -13,7 +13,7 @@ public class Course extends Base {
 
     private static String TB = "courses";
     private static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.S";
-//    static private String DATE_FORMAT = "dd.MM.yyyy, HH:mm";
+    static private String DISPLAY_DATE_FORMAT = "dd.MM.yyyy, HH:mm";
 
     private int courseId;
     private String title;
@@ -52,6 +52,12 @@ public class Course extends Base {
         this.title = title;
     }
 
+    public String getDisplayStartDate() {
+    	System.out.println("getStartDate on " + this);
+        return new SimpleDateFormat(DISPLAY_DATE_FORMAT).format(startDate);
+//    	return DateManager.toReadableDateString(this.startDate);
+    }
+
     public String getStartDate() {
     	System.out.println("getStartDate on " + this);
         return new SimpleDateFormat(DATE_FORMAT).format(startDate);
@@ -81,6 +87,11 @@ public class Course extends Base {
     public String getEndDate() {
     	System.out.println("getEndDate on " + this);
     	return new SimpleDateFormat(DATE_FORMAT).format(endDate);
+//    	return DateManager.toReadableDateString(this.endDate);
+    }
+    public String getDisplayEndDate() {
+    	System.out.println("getEndDate on " + this);
+    	return new SimpleDateFormat(DISPLAY_DATE_FORMAT).format(endDate);
 //    	return DateManager.toReadableDateString(this.endDate);
     }
 
