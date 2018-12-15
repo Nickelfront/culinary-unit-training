@@ -57,7 +57,7 @@ public class AssignClientToCourseController implements Initializable {
             Course selectedCourse = coursesComboBox.getSelectionModel()
                     .getSelectedItem();
             if (selectedCourse.getAvailableSpots() == 0) {
-                MessageDisplay.info("Курсъг е запълнен!");
+                MessageDisplay.info("Курсът е запълнен!");
                 currentStage.close();
                 return;
             }

@@ -18,6 +18,7 @@ import helpers.Message;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
+import java.text.SimpleDateFormat;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -122,7 +123,10 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
-
+        
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        birthDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         phoneColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         emailColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
@@ -188,7 +192,8 @@ public class ClientsController implements Initializable {
     }
 
     private String getClientAge(LocalDate birthDateInput) {
-        return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))).toString();
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd"); 
+        return formater.format(Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))));
     }
 
     private int incrementID() {
