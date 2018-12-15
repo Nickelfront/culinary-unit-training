@@ -5,8 +5,8 @@
  */
 package helpers;
 
-import entity.Base;
 import java.util.List;
+
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,7 +20,7 @@ import javafx.util.Pair;
 public class TableFactory {
 
     /**
-     * Configurate list of rows
+     * Configure list of rows
      * 
      * @param values
      */
@@ -31,7 +31,7 @@ public class TableFactory {
     }
     
     /**
-     * Configurate single row
+     * Configure single row
      * 
      * @param tableId
      * @param classProperty

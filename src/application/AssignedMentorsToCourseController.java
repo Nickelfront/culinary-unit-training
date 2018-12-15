@@ -7,12 +7,14 @@ import java.util.ResourceBundle;
 import entity.Base;
 import entity.Course;
 import entity.Mentor;
+import helpers.ImageLoader;
 import helpers.TableFactory;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class AssignedMentorsToCourseController implements Initializable {
 
@@ -41,7 +43,7 @@ public class AssignedMentorsToCourseController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		TableFactory.configureRow(idColumn, "clientId");
+		TableFactory.configureRow(idColumn, "mentorId");
 		TableFactory.configureRow(firstNameColumn, "firstName");
 		TableFactory.configureRow(lastNameColumn, "lastName");
 		TableFactory.configureRow(phoneColumn, "phone");

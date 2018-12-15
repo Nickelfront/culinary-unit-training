@@ -49,22 +49,20 @@ public class LoginFormController{
 		    Properties session = new Properties();
 		    session.put("loggedUser", username);
 		    session.put("userPicture", username + "-icon.png");
-//		    session.put("userBackground", username + "-bg.png");
 		    
 		    File file = new File("session.properties");
 		    try {
 		    	OutputStream out = new FileOutputStream(file);
 	            session.store(out, null);
 	        } catch (Exception e) {
-				e.printStackTrace();	// show where it all went wrong 
-				
+				e.printStackTrace();
 				// display a message to the end user
 				Alert alert = new Alert(AlertType.ERROR, "Възникна грешка при влизане.");
 				alert.setTitle("Грешка");
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR, "Въведени са неправилни данни!");
-			alert.setTitle("Неправилни данни");
+			alert.setTitle("Неуспешно влизане");
 
 			alert.showAndWait();
 		}

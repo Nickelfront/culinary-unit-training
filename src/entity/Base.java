@@ -5,18 +5,17 @@
  */
 package entity;
 
-import DB.BaseDBConnector;
-import DB.BaseDBDriver;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import DB.BaseDBConnector;
+import DB.BaseDBDriver;
 
 /**
  *
@@ -189,7 +188,7 @@ public abstract class Base {
         String relation = this.relationships.get(relationship);
 
         if (relation == null) {
-            throw new Exception("Relationsipt is not speciefied");
+            throw new Exception("Relationsip is not specified");
         }
 
         String[] relationOptions = relation.split(":");

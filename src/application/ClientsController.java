@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -7,18 +8,17 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import entity.Client;
+import helpers.Message;
 import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
-import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +27,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -124,7 +123,7 @@ public class ClientsController implements Initializable {
         TableFactory.configureRow(birthDateColumn, "birthDate");
         TableFactory.configureRow(phoneColumn, "phone");
         TableFactory.configureRow(emailColumn, "email");
-
+        
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         birthDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -146,27 +145,30 @@ public class ClientsController implements Initializable {
     @FXML
     private void handleAddClient(ActionEvent event) {
         LocalDate birthDateInput = birthDate.getValue();
+        String clientFirstName = firstName.getText();
+        String clientLastName = lastName.getText();
+        
         String clientEmail = email.getText();
         String clientPhoneNumber = phone.getText();
 
+        if (clientFirstName.isEmpty() || clientLastName.isEmpty()) {
+        	Message.displayInfo("Не сте въвели имена на клиент!");
+            Validator.setFieldInputAsInvalid(clientFirstName.isEmpty() ? firstName : lastName);
+            return;
+        }
+        
         if (!Validator.validateEmail(clientEmail)) {
-            Alert al = new Alert(Alert.AlertType.INFORMATION);
-            al.setContentText("Невалиден e-Mail!");
+        	Message.displayInfo("Невалиден e-Mail!");
             Validator.setFieldInputAsInvalid(email);
-            al.show();
             return;
         }
         if (!Validator.validateAge(birthDateInput)) {
-            Alert al = new Alert(Alert.AlertType.INFORMATION);
-            al.setContentText("Клиентът трябва да е лице на възраст над 16 години!");
-            al.show();
+            Message.displayInfo("Клиентът трябва да е лице на възраст над 16 години!");
             return;
         }
         if (!Validator.validatePhoneNumber(clientPhoneNumber)) {
-            Alert al = new Alert(Alert.AlertType.INFORMATION);
-            al.setContentText("Невалиден телефонен номер.");
-            Validator.setFieldInputAsInvalid(phone);
-            al.show();
+        	Message.displayInfo("Невалиден телефонен номер.");
+        	Validator.setFieldInputAsInvalid(phone);
             return;
         }
 
@@ -180,15 +182,18 @@ public class ClientsController implements Initializable {
 
     @FXML
     private void handleClearForm() {
-        firstName.setText("");
-        lastName.setText("");
+        TextField[] all = { firstName, lastName, email, phone };
+    	
+        for (TextField field : all) {
+        	field.setText("");
+        	Validator.resetField(field);
+        }
         birthDate.setValue(null);
-        email.setText("");
-        phone.setText(""); // TODO: if border has become red from previous validation attempt, reset it.
     }
 
     private String getClientAge(LocalDate birthDateInput) {
-        return Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))).toString();
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd"); 
+        return formater.format(Date.from(Instant.from(birthDateInput.atStartOfDay(ZoneId.systemDefault()))));
     }
 
     private int incrementID() {
@@ -209,10 +214,8 @@ public class ClientsController implements Initializable {
         ButtonType delete = new ButtonType("Изтрий", ButtonData.OK_DONE);
         ButtonType cancel = new ButtonType("Отказ", ButtonData.CANCEL_CLOSE);
 
-        Alert al = new Alert(Alert.AlertType.CONFIRMATION,
-                "Сигурни ли сте, че искате да изтриете следния клиент: \n\t" + clientName, delete, cancel);
-        al.showAndWait();
-        if (al.getResult().equals(delete)) {
+        ButtonType[] buttons = {delete, cancel};
+        if (Message.prompt("Сигурни ли сте, че искате да изтриете следния клиент: \n\t" + clientName, buttons).equals(delete)) {
             clientsTable.getItems().remove(selectedClient);
             selectedClient.delete();
         }
@@ -229,17 +232,13 @@ public class ClientsController implements Initializable {
         foundClients = new ArrayList<Client>();
 
         if (searchedClientName.getText().contains(" ")) {
-            // String[] fullName = searchedClientName.getText().split(" ");
             String name = searchedClientName.getText();
             for (Client client : clientsList) {
-                // if (fullName[0].equals(client.getFirstName())) {
-                // if (fullName[1].equals(client.getLastName())) {
                 if (name.equals(client.getFirstName() + " " + client.getLastName())) {
                     foundClients.add(client);
                     System.out.println(client);
                 }
             }
-            // }
         } else {
             String name = searchedClientName.getText();
             for (Client client : clientsList) {
@@ -327,7 +326,6 @@ public class ClientsController implements Initializable {
         } else {
             prevIndex = foundClientsCount - 1;
         }
-
         displayResult(prevIndex);
         currentResult.setText(prevIndex + 1 + "");
     }

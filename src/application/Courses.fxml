@@ -29,12 +29,12 @@
                         <TableView fx:id="coursesTable" prefHeight="423.0" prefWidth="295.0" snapToPixel="false" styleClass="table">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="67.0" resizable="false" text="ID" />
-                            <TableColumn fx:id="titleColumn" minWidth="-1.0" prefWidth="142.0" resizable="false" text="Име на курса" />
-                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" prefWidth="167.0" resizable="false" text="Описание" />
+                            <TableColumn fx:id="titleColumn" minWidth="-1.0" onEditCommit="#updateCourseTitle" prefWidth="142.0" resizable="false" text="Име на курса" />
+                              <TableColumn fx:id="descriptionColumn" minWidth="-1.0" onEditCommit="#updateCourseDescription" prefWidth="167.0" resizable="false" text="Описание" />
                               <TableColumn fx:id="startDateColumn" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Начална дата" />
                               <TableColumn fx:id="endDateColumn" minWidth="-1.0" prefWidth="113.0" resizable="false" text="Крайна дата" />
-                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
-                              <TableColumn fx:id="priceColumn" prefWidth="104.0" resizable="false" text="Цена" />
+                              <TableColumn fx:id="availableSpotsColumn" minWidth="-1.0" onEditCommit="#updateAvailableSpots" prefWidth="156.0" resizable="false" text="Макс. свободни места" />
+                              <TableColumn fx:id="priceColumn" onEditCommit="#updateCoursePrice" prefWidth="104.0" resizable="false" text="Цена" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>
@@ -52,8 +52,8 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="searchedCourseTitle" layoutX="52.0" layoutY="65.0" prefHeight="29.0" prefWidth="273.0" />
-                              <Label layoutX="52.0" layoutY="38.0" text="По име на курса" />
+                              <TextField fx:id="searchedKeyword" layoutX="52.0" layoutY="65.0" prefHeight="29.0" prefWidth="273.0" />
+                              <Label layoutX="52.0" layoutY="38.0" text="По ключова дума" />
                               <Button fx:id="searchByTitleBtn" layoutX="236.0" layoutY="105.0" mnemonicParsing="false" onAction="#searchByTitle" prefHeight="29.0" prefWidth="89.0" text="Търси" />
                               <Label layoutX="52.0" layoutY="134.0" text="По дата" />
                               <Button fx:id="searchByPeriodBtn" layoutX="236.0" layoutY="207.0" mnemonicParsing="false" onAction="#searchByPeriod" prefHeight="29.0" prefWidth="89.0" text="Търси" />
@@ -112,19 +112,19 @@
                      <content>
                         <Pane>
                            <children>
-                              <TextField fx:id="courseTitle" layoutX="62.0" layoutY="85.0" prefHeight="29.0" prefWidth="305.0" promptText="Име на курс" />
-                              <TextArea fx:id="courseDescription" layoutX="62.0" layoutY="121.0" prefHeight="100.0" prefWidth="306.0" promptText="Описание" />
-                              <DatePicker fx:id="courseStartDate" layoutX="62.0" layoutY="230.0" prefHeight="29.0" prefWidth="306.0" promptText="Начална дата" />
-                              <DatePicker fx:id="courseEndDate" layoutX="62.0" layoutY="267.0" prefHeight="29.0" prefWidth="306.0" promptText="Крайна дата" />
-                              <TextField fx:id="courseMaxAvailableSpots" layoutX="62.0" layoutY="304.0" prefHeight="29.0" prefWidth="306.0" promptText="Макс. свободни места" />
-                              <TextField fx:id="coursePrice" layoutX="62.0" layoutY="341.0" prefHeight="29.0" prefWidth="306.0" promptText="Цена" />
-                              <Label layoutX="156.0" layoutY="43.0" text="Нов курс">
+                              <TextField fx:id="courseTitle" layoutX="62.0" layoutY="70.0" prefHeight="29.0" prefWidth="305.0" promptText="Име на курс" />
+                              <TextArea fx:id="courseDescription" layoutX="62.0" layoutY="106.0" prefHeight="100.0" prefWidth="306.0" promptText="Описание" />
+                              <DatePicker fx:id="courseStartDate" layoutX="62.0" layoutY="215.0" prefHeight="29.0" prefWidth="306.0" promptText="Начална дата" />
+                              <DatePicker fx:id="courseEndDate" layoutX="62.0" layoutY="252.0" prefHeight="29.0" prefWidth="306.0" promptText="Крайна дата" />
+                              <TextField fx:id="courseMaxAvailableSpots" layoutX="62.0" layoutY="289.0" prefHeight="29.0" prefWidth="306.0" promptText="Макс. свободни места" />
+                              <TextField fx:id="coursePrice" layoutX="62.0" layoutY="326.0" prefHeight="29.0" prefWidth="306.0" promptText="Цена" />
+                              <Label layoutX="156.0" layoutY="28.0" text="Нов курс">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="58.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleAddCourses" prefHeight="29.0" prefWidth="135.0" text="Добави" />
-                              <Button layoutX="234.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="29.0" prefWidth="134.0" text="Изчисти" />
+                              <Button layoutX="62.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleAddCourses" prefHeight="30.0" prefWidth="135.0" text="Добави" />
+                              <Button layoutX="234.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleClearForm" prefHeight="30.0" prefWidth="135.0" text="Изчисти" />
                            </children>
                         </Pane>
                      </content></Tab>

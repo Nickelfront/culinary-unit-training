@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import helpers.DateManager;
+
 public class Course extends Base {
 
-    static private String TB = "courses";
-    static private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.S";
+    private static String TB = "courses";
+    private static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.S";
+    static private String DISPLAY_DATE_FORMAT = "dd.MM.yyyy";
+
     private int courseId;
     private String title;
     private Date startDate;
@@ -48,16 +52,20 @@ public class Course extends Base {
         this.title = title;
     }
 
+    public String getDisplayStartDate() {
+    	System.out.println("getStartDate on " + this);
+        return new SimpleDateFormat(DISPLAY_DATE_FORMAT).format(startDate);
+//    	return DateManager.toReadableDateString(this.startDate);
+    }
+
     public String getStartDate() {
+    	System.out.println("getStartDate on " + this);
         return new SimpleDateFormat(DATE_FORMAT).format(startDate);
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return new SimpleDateFormat(DATE_FORMAT).format(endDate);
+    	this.startDate = startDate;
+    	System.out.println("setStartDate on " + this);
     }
 
     public Date getParsedStartDate() {
@@ -69,6 +77,21 @@ public class Course extends Base {
         return null;
     }
 
+    public String getEndDate() {
+    	System.out.println("getEndDate on " + this);
+    	return new SimpleDateFormat(DATE_FORMAT).format(endDate);
+//    	return DateManager.toReadableDateString(this.endDate);
+    }
+    public String getDisplayEndDate() {
+    	System.out.println("getEndDate on " + this);
+    	return new SimpleDateFormat(DISPLAY_DATE_FORMAT).format(endDate);
+    }
+
+    public void setEndDate(Date endDate) {
+    	this.endDate = endDate;
+    	System.out.println("setEndDate on " + this);
+    }
+
     public Date getParsedEndDate() {
         try {
             return new SimpleDateFormat(DATE_FORMAT).parse(getEndDate());
@@ -76,10 +99,6 @@ public class Course extends Base {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public int getAvailableSpots() {

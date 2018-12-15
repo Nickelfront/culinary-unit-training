@@ -1,5 +1,6 @@
 package application;
 
+import helpers.ImageLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +36,7 @@ public class HomeController implements Initializable {
 		try {
 			aboutRoot = (Parent) fxmlLoader.load();
 			Stage stage = new Stage();
-			Image icon = new Image(getClass().getClassLoader().getResourceAsStream("cooking.png"));
+			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
 			stage.getIcons().add(icon);
 			stage.setTitle("Относно");
 			stage.setResizable(false);
