@@ -35,8 +35,8 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#openCoursesInquery" text="Справка Курсове" />
-                                    <MenuItem mnemonicParsing="false" onAction="#openAssignView" text="Добави към курс" />
+                                  <MenuItem mnemonicParsing="false" onAction="#openCoursesInquiry" text="Справка курсове" />
+                                    <MenuItem mnemonicParsing="false" onAction="#openAssignView" text="Възложи курс" />
                                     <MenuItem fx:id="deleteRightClick" mnemonicParsing="false" onAction="#deleteMentor" text="Изтрий" />
                                 </items>
                               </ContextMenu>
@@ -77,11 +77,11 @@
                                           <Font size="23.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="prevBtn" disable="true" layoutX="127.0" layoutY="386.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
-                                    <Button fx:id="nextBtn" disable="true" layoutX="257.0" layoutY="386.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
-                                    <Label fx:id="resultCount" layoutX="233.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
-                                    <Label fx:id="currentResult" layoutX="191.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
-                                    <Label layoutX="211.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="от" />
+                                    <Button fx:id="prevBtn" disable="true" layoutX="129.0" layoutY="369.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
+                                    <Button fx:id="nextBtn" disable="true" layoutX="259.0" layoutY="369.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
+                                    <Label fx:id="resultCount" layoutX="235.0" layoutY="374.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label fx:id="currentResult" layoutX="193.0" layoutY="374.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label layoutX="213.0" layoutY="374.0" prefHeight="19.0" prefWidth="20.0" text="от" />
                                  </children>
                               </AnchorPane>
                               <Button fx:id="searchByPhoneBtn" layoutX="206.0" layoutY="232.0" mnemonicParsing="false" onAction="#searchByPhone" prefHeight="29.0" prefWidth="89.0" text="Търси" />

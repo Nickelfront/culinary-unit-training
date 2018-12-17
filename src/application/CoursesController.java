@@ -12,8 +12,8 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXSlider;
 
 import entity.Course;
+import helpers.ImageLoader;
 import helpers.Message;
-import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
 import javafx.collections.ObservableList;
@@ -277,7 +277,7 @@ public class CoursesController implements Initializable {
 			}
 		}
 		if (foundCourses.isEmpty()) {
-			MessageDisplay.noSearchResults();
+			Message.displayInfo("Няма резултати от търсенето");
 			return;
 		}
 		if (foundCourses.size() > 1) {
@@ -303,7 +303,7 @@ public class CoursesController implements Initializable {
 			}
 		}
 		if (foundCourses.isEmpty()) {
-			MessageDisplay.noSearchResults();
+			Message.displayInfo("Няма резултати от търсенето");
 			return;
 		}
 		if (foundCourses.size() > 1) {
@@ -330,7 +330,7 @@ public class CoursesController implements Initializable {
 		}
 
 		if (foundCourses.isEmpty()) {
-			MessageDisplay.noSearchResults();
+			Message.displayInfo("Няма резултати от търсенето");
 			return;
 		}
 
@@ -413,6 +413,7 @@ public class CoursesController implements Initializable {
 
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
+		ImageLoader.getInstance().setIcon("cooking.png", stage);
 		stage.setTitle("Справка за участници в " + selectedItem().getTitle());
 		stage.setResizable(false);
 		stage.setScene(scene);
@@ -431,6 +432,7 @@ public class CoursesController implements Initializable {
 
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
+		ImageLoader.getInstance().setIcon("cooking.png", stage);
 		stage.setTitle("Справка за ментори на " + selectedItem().getTitle());
 		stage.setResizable(false);
 		stage.setScene(scene);

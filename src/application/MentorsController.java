@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import entity.Mentor;
+import helpers.ImageLoader;
 import helpers.Message;
-import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
 import javafx.collections.ObservableList;
@@ -232,10 +232,10 @@ public class MentorsController implements Initializable {
 		}
 
 		if (foundMentors.isEmpty()) {
-			MessageDisplay.noSearchResults();
+			Message.displayInfo("Няма резултати от търсенето.");
 			return;
 		}
-
+		
 		if (foundMentors.size() > 1) {
 			enableNavigation();
 		}
@@ -258,7 +258,7 @@ public class MentorsController implements Initializable {
 			}
 		}
 		if (foundMentors.isEmpty()) {
-			MessageDisplay.noSearchResults();
+			Message.displayInfo("Няма резултати от търсенето.");
 			return;
 		}
 
@@ -284,7 +284,7 @@ public class MentorsController implements Initializable {
 			}
 		}
 		if (foundMentors.isEmpty()) {
-			MessageDisplay.noSearchResults();
+            Message.displayInfo("Няма резултати от търсенето");
 			return;
 		}
 
@@ -353,7 +353,7 @@ public class MentorsController implements Initializable {
 	}
 
 	@FXML
-	private void openCoursesInquery(ActionEvent event) {
+	private void openCoursesInquiry(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MentorCourses.fxml"));
 			MentorCoursesController controller = new MentorCoursesController(
@@ -364,6 +364,7 @@ public class MentorsController implements Initializable {
 
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			ImageLoader.getInstance().setIcon("cooking.png", stage);
 			stage.setTitle("Справка за Ментор");
 			stage.setResizable(false);
 			stage.setScene(scene);
@@ -386,6 +387,7 @@ public class MentorsController implements Initializable {
 
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			ImageLoader.getInstance().setIcon("cooking.png", stage);
 			stage.setTitle("Справка за Ментор");
 			stage.setResizable(false);
 			stage.setScene(scene);

@@ -16,7 +16,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox fx:id="oldSettingsChoice" layoutX="46.0" layoutY="229.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="217.0" text="Върни темата по подразбиране" />
+      <CheckBox fx:id="oldSettingsChoice" layoutX="46.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#defaultThemeIsChosen" prefHeight="19.0" prefWidth="217.0" text="Върни темата по подразбиране" />
       <Button fx:id="cancelBtn" layoutX="47.0" layoutY="297.0" mnemonicParsing="false" onAction="#cancelChoices" prefHeight="29.0" prefWidth="83.0" text="Отказ" />
       <Button fx:id="saveBtn" layoutX="180.0" layoutY="297.0" mnemonicParsing="false" onAction="#saveChoices" prefHeight="29.0" prefWidth="83.0" text="Запази" />
       <Line endX="116.0" fill="#9e9e9e" layoutX="146.0" layoutY="197.0" startX="-100.0" stroke="#9e9e9e" strokeWidth="0.2" />

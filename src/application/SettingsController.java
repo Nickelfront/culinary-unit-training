@@ -41,6 +41,13 @@ public class SettingsController implements Initializable {
 		themesList.getItems().addAll(themes);
 		currentTheme.setText(currentTheme.getText() + " " + new ThemeLoader().get("current"));
 	}
+	
+	@FXML
+	public boolean defaultThemeIsChosen() {
+		boolean revertToDefault = oldSettingsChoice.isSelected();
+		themesList.setDisable(revertToDefault);
+		return revertToDefault;
+	}
 
 	@FXML
 	public void cancelChoices() {
@@ -52,10 +59,11 @@ public class SettingsController implements Initializable {
 	public void saveChoices() {
 		ThemeLoader theme = new ThemeLoader();
 
-		String choice = themesList.getSelectionModel().getSelectedItem().toString().toLowerCase();
-
-		if (oldSettingsChoice.isSelected()) {
+		String choice = "";
+		if (defaultThemeIsChosen()) {
 			choice = theme.get("default");
+		} else {
+			choice = themesList.getSelectionModel().getSelectedItem().toString().toLowerCase();
 		}
 		theme.set("current", choice);
 

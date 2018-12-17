@@ -53,9 +53,13 @@ public class SideMenuController implements Initializable {
 		userName.setStyle("-fx-stroke-width: 2px");
 
 		String userPicturePath = session.get("userPicture");
-		Image userPicture = ImageLoader.getInstance().loadImage(userPicturePath);
-		userImageHolder.setImage(userPicture);
-
+		try {
+			Image userPicture = ImageLoader.getInstance().loadImage(userPicturePath);
+			userImageHolder.setImage(userPicture);
+		} catch (NullPointerException e) {
+			System.out.println("User image does not exist. Setting the default picture instead.");
+		}
+		
 		ThemeLoader themeLoader = new ThemeLoader();
 		String userBgPath = "default-bg-" + themeLoader.get("current") + ".png";
 		Image userBgPicture = ImageLoader.getInstance().loadImage(userBgPath);
@@ -129,8 +133,7 @@ public class SideMenuController implements Initializable {
 		alert.setTitle("Изход");
 		alert.showAndWait();
 		if (alert.getResult().equals(yes)) {
-			Stage stage = (Stage) exitBtn.getScene().getWindow();
-			stage.close();
+			System.exit(0);
 		}
 	}
 

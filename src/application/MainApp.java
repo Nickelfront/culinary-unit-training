@@ -23,7 +23,6 @@ public class MainApp extends Application {
 		AnchorPane root;
 
 		try {
-
 			@SuppressWarnings("unused")
 			BaseDBConnector dc = BaseDBConnector.getInstance();
 			root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainApp.fxml"));
@@ -34,8 +33,6 @@ public class MainApp extends Application {
 			styleSheetLoader.loadStyleSheet("application");
 			styleSheetLoader.loadStyleSheet(new ThemeLoader().get("current"));
 
-//			Image icon = ImageLoader.getInstance().loadImage("cooking.png");
-//			stage.getIcons().add(icon);
 			ImageLoader.getInstance().setIcon("cooking.png", stage);
 			stage.setResizable(false);
 			stage.setScene(scene);

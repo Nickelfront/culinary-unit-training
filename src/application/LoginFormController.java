@@ -1,10 +1,6 @@
 package application;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.Properties;
-
+import helpers.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,7 +18,6 @@ public class LoginFormController{
 	PasswordField passwordInput;
 	@FXML
 	Button loginButton;
-
 
 	@FXML
 	public void onEnter(ActionEvent e) {
@@ -46,14 +41,12 @@ public class LoginFormController{
 		    app.start(mainAppStage);
 		    
 		    //write a properties file with user information that will be shown in the app
-		    Properties session = new Properties();
-		    session.put("loggedUser", username);
-		    session.put("userPicture", username + "-icon.png");
+		    Session session = new Session();
+		    session.set("loggedUser", username);
+		    session.set("userPicture", username + "-icon.png");
 		    
-		    File file = new File("session.properties");
 		    try {
-		    	OutputStream out = new FileOutputStream(file);
-	            session.store(out, null);
+		    	session.save();
 	        } catch (Exception e) {
 				e.printStackTrace();
 				// display a message to the end user

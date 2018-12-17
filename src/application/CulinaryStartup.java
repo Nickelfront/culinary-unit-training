@@ -1,13 +1,11 @@
 package application;
 
-
 import helpers.ImageLoader;
-import helpers.ThemeLoader;
 import helpers.StyleSheetLoader;
+import helpers.ThemeLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,10 +20,8 @@ public class CulinaryStartup extends Application {
 		styleSheetLoader.loadStyleSheet("application");
 		styleSheetLoader.loadStyleSheet(new ThemeLoader().get("current"));
 		
-//		Image icon = ImageLoader.getInstance().loadImage("cooking.png");
 		ImageLoader.getInstance().setIcon("cooking.png", primaryStage);
-		
-//		primaryStage.getIcons().add(icon);
+
 		primaryStage.setTitle("Вход");
 		primaryStage.setScene(scene);
 		primaryStage.show();

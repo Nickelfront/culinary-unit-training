@@ -25,6 +25,8 @@ public class AboutController implements Initializable {
 	Hyperlink flaticonLink;
 	@FXML
 	Hyperlink jfxLink;
+	@FXML
+	Hyperlink gitHubLink;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -49,5 +51,10 @@ public class AboutController implements Initializable {
 	@FXML
 	public void onClickThirdLink() {
 		new MainApp().getHostServices().showDocument("http://www.jfoenix.com");
+	}
+	
+	@FXML
+	public void onClickGitLink() {
+		new MainApp().getHostServices().showDocument("https://github.com/Nickelfront/culinary-unit-training");
 	}
 }

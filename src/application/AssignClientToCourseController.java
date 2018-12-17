@@ -5,14 +5,15 @@
  */
 package application;
 
-import entity.Client;
-import entity.Course;
-import helpers.MessageDisplay;
-import helpers.TableFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import entity.Client;
+import entity.Course;
+import helpers.Message;
+import helpers.TableFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,7 +58,7 @@ public class AssignClientToCourseController implements Initializable {
             Course selectedCourse = coursesComboBox.getSelectionModel()
                     .getSelectedItem();
             if (selectedCourse.getAvailableSpots() == 0) {
-                MessageDisplay.info("Курсът е запълнен!");
+                Message.displayInfo("Курсът е запълнен!");
                 currentStage.close();
                 return;
             }
@@ -65,7 +66,7 @@ public class AssignClientToCourseController implements Initializable {
             String response = client.attach("course", selectedCourse.getCourseId());
             
             if(response.equals("19")){
-                MessageDisplay.info("Клиентът вече е записан!");
+                Message.displayInfo("Клиентът вече е записан!");
                 return;
             }
             
