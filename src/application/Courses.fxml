@@ -65,7 +65,7 @@
                               <Label layoutX="49.0" layoutY="316.0" text="Максимална:" />
                               <DatePicker fx:id="fromDate" layoutX="52.0" layoutY="162.0" prefHeight="30.0" prefWidth="125.0" promptText="от..." />
                               <DatePicker fx:id="toDate" layoutX="200.0" layoutY="163.0" prefHeight="29.0" prefWidth="125.0" promptText="до..." />
-                              <AnchorPane layoutX="438.0" layoutY="2.0" prefHeight="429.0" prefWidth="450.0" style="-fx-border-color: #eee;">
+                              <AnchorPane layoutX="438.0" prefHeight="429.0" prefWidth="450.0" style="-fx-border-color: #eee;">
                                  <children>
                                     <Label fx:id="foundCourseTitle" layoutX="14.0" layoutY="59.0" text="Име на курса: ">
                                        <font>
@@ -87,11 +87,11 @@
                                           <Font size="23.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="prevBtn" disable="true" layoutX="127.0" layoutY="386.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
-                                    <Button fx:id="nextBtn" disable="true" layoutX="257.0" layoutY="386.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
-                                    <Label fx:id="resultCount" layoutX="233.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
-                                    <Label fx:id="currentResult" layoutX="191.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="0" />
-                                    <Label layoutX="211.0" layoutY="391.0" prefHeight="19.0" prefWidth="20.0" text="от" />
+                                    <Button fx:id="prevBtn" disable="true" layoutX="129.0" layoutY="377.0" mnemonicParsing="false" onAction="#showPreviousResult" text="Назад" />
+                                    <Button fx:id="nextBtn" disable="true" layoutX="259.0" layoutY="377.0" mnemonicParsing="false" onAction="#showNextResult" text="Напред" />
+                                    <Label fx:id="resultCount" layoutX="235.0" layoutY="382.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label fx:id="currentResult" layoutX="193.0" layoutY="382.0" prefHeight="19.0" prefWidth="20.0" text="0" />
+                                    <Label layoutX="213.0" layoutY="382.0" prefHeight="19.0" prefWidth="20.0" text="от" />
                                     <Label fx:id="foundCoursePrice" layoutX="14.0" layoutY="221.0" text="Цена: ">
                                        <font>
                                           <Font size="18.0" />

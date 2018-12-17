@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -14,11 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import entity.Client;
+import helpers.ImageLoader;
 import helpers.Message;
-import helpers.MessageDisplay;
 import helpers.TableFactory;
 import helpers.Validator;
-import java.text.SimpleDateFormat;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -250,7 +250,7 @@ public class ClientsController implements Initializable {
         }
 
         if (foundClients.isEmpty()) {
-            MessageDisplay.noSearchResults();
+            Message.displayInfo("Няма резултати от търсенето");
             return;
         }
 
@@ -276,7 +276,7 @@ public class ClientsController implements Initializable {
             }
         }
         if (foundClients.isEmpty()) {
-            MessageDisplay.noSearchResults();
+            Message.displayInfo("Няма резултати от търсенето");
             return;
         }
 
@@ -302,7 +302,7 @@ public class ClientsController implements Initializable {
             }
         }
         if (foundClients.isEmpty()) {
-            MessageDisplay.noSearchResults();
+            Message.displayInfo("Няма резултати от търсенето");
             return;
         }
 
@@ -378,7 +378,8 @@ public class ClientsController implements Initializable {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Записване за курс");
+    		ImageLoader.getInstance().setIcon("cooking.png", stage);            
+    		stage.setTitle("Записване за курс");
             stage.setResizable(false);
             stage.setScene(scene);
 
@@ -399,7 +400,8 @@ public class ClientsController implements Initializable {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Справка за клиент");
+    		ImageLoader.getInstance().setIcon("cooking.png", stage);
+    		stage.setTitle("Справка за клиент");
             stage.setResizable(false);
             stage.setScene(scene);
 
@@ -429,7 +431,7 @@ public class ClientsController implements Initializable {
     public void updateClientBirthDate(TableColumn.CellEditEvent<Client, String> event) {
         String newBirthDate = event.getNewValue();
         if (!Validator.isValidFormat("yyyy-MM-dd", newBirthDate, Locale.ENGLISH)) {
-            MessageDisplay.info("Форматът на датата не се поддържа! Моля използвайте yyyy-mm-dd, пример: 1997-02-25");
+            Message.displayInfo("Форматът на датата не се поддържа! Моля използвайте yyyy-mm-dd, пример: 1997-02-25");
             return;
         }
         
@@ -441,7 +443,7 @@ public class ClientsController implements Initializable {
     public void updateClientPhone(TableColumn.CellEditEvent<Client, String> event) {
         String newPhone = event.getNewValue();
         if (!Validator.validatePhoneNumber(newPhone)) {
-            MessageDisplay.info("Грешен формат за телефон!");
+            Message.displayInfo("Грешен формат за телефонен номер!");
             return;
         }
         
@@ -453,7 +455,7 @@ public class ClientsController implements Initializable {
     public void updateClientMail(TableColumn.CellEditEvent<Client, String> event) {
         String newEmail = event.getNewValue();
         if (!Validator.validateEmail(newEmail)) {
-            MessageDisplay.info("Грешен формат за E-mail!");
+            Message.displayInfo("Грешен формат за E-mail!");
             return;
         }
         selectedItem().setEmail(newEmail);

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 import entity.Course;
 import entity.Mentor;
-import helpers.MessageDisplay;
+import helpers.Message;
 import helpers.TableFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +58,7 @@ public class AssignMentorToCourseController implements Initializable {
             String response = mentor.attach("course", selectedCourse.getCourseId());
             
             if(response.equals("19")){
-                MessageDisplay.info("Менторът вече е записан!");
+    			Message.displayInfo("Менторът вече е записан!");
                 return;
             }
             

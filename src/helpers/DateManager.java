@@ -10,6 +10,7 @@ public class DateManager {
 	
 	private final static String DATE_FORMAT = "dd.MM.yyyy, HH:mm";
 
+	@SuppressWarnings("deprecation")
 	public static int getYearDifference(Date date) {
 		Date today = new Date();
 		int difference = 0;

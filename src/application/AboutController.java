@@ -52,6 +52,7 @@ public class AboutController implements Initializable {
 	public void onClickThirdLink() {
 		new MainApp().getHostServices().showDocument("http://www.jfoenix.com");
 	}
+	
 	@FXML
 	public void onClickGitLink() {
 		new MainApp().getHostServices().showDocument("https://github.com/Nickelfront/culinary-unit-training");
